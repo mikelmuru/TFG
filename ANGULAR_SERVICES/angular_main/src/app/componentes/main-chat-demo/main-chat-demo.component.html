@@ -1,0 +1,50 @@
+<div id="mainChat">
+
+    <div id="menuChats">
+        <p>All Chats</p>
+
+        <div id="chatlist">
+            <div class="chat" *ngFor="let chat of allChats; let i = index">
+                <button (click)="changeLoadChat(i)" class="chatbtn">
+                    {{chat.getChatName()}}
+                </button>
+                <span class="chatopts">iconos</span>
+            </div>
+        </div>
+
+        <div id="createChat">
+            <input type="text" id="newchatname" class="basicinput" #newChatName placeholder="New Chat">
+            <button (click)="createNewChat(newChatName,newChatName.value)"
+                    id="createchatbtn" class="emitbtn">
+            </button>
+        </div>
+    </div>
+
+    <div id="myChat" *ngIf="actualChatId > -1">
+        <p class="chattitle">
+            <b>{{allChats[actualChatId].getChatName()}}</b>
+        </p>
+        <hr>
+        <div id="allmessages">
+            <div *ngFor="let message of allChats[actualChatId].getMessages()" class="message">
+
+                <span class="{{message.getFrom()}} mychatP">
+                    <b *ngIf="message.getFrom() == 'local'">You</b>
+                    <b *ngIf="message.getFrom() == 'remote'">{{message.getWho()}}</b>
+                </span>
+                <span class="{{message.getFrom()}} mychatP">
+                    {{message.getText()}}
+                </span>
+
+            </div>
+        </div>
+        <div id="sendMessage">
+            <input type="text" id="who" #who placeholder="Your Name" class="basicinput">
+            <input type="text" id="msg" #msg placeholder="Message" class="basicinput">
+            <button (click)="sendMessage(who.value,msg.value,who,msg)" class="emitbtn">
+                Send
+            </button>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,201 @@
+:host {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+#mainChat {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(203, 225, 245);
+    /* border: 1px solid black; */
+}
+
+/* ============================================================ */
+/* AQUI EMPIEZAN LOS ESTILOS PARA LA LISTA DE CHATS DISPONIBLES */
+/* ============================================================ */
+
+#menuChats {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(175, 209, 238);
+}
+
+#menuChats p {
+    margin: 0px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+#chatlist {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+#chatlist::-webkit-scrollbar {
+    display: none;
+}
+
+.chat {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.chatbtn,
+.chatopts {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-left: 1rem;
+    border: 0;
+}
+
+.chatbtn {
+    width: 60%;
+    text-align: left;
+    border-bottom: 0.5px solid black;
+    background-color: #ffffff00;
+}
+.chatbtn:hover {
+    background-color: rgb(159, 200, 236);
+}
+
+.chatopts {
+    width: 35%;
+    text-align: center;
+}
+
+#createChat {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    /* padding-right: .25rem;
+    padding-left: .25rem; */
+    width: 100%;
+    margin-top: auto;
+}
+
+#createChat #newchatname {
+    width: 60%;
+}
+
+#createChat #createchatbtn {
+    width: 25%;
+    text-align: center;
+}
+#createchatbtn::before {
+    content: "Create";
+    /* Texto por defecto */
+}
+@media screen and (max-width: 1000px) {
+    #createchatbtn::before {
+        content: "DO";
+        /* Texto para ventanas pequeñas */
+    }
+}
+
+/* ================================================================================= */
+/* AQUI EMPIEZA EL ELEMENTO MYCHAT -- ESTILOS PARA EL CHAT QUE EL USUARIO SELECCIONA */
+/* ================================================================================= */
+
+#myChat {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chattitle {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    margin: 0;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+#myChat hr {
+    width: 70%;
+    margin-top: 0;
+}
+
+.local {
+    text-align: right;
+}
+.remote {
+    text-align: left;
+}
+
+#allmessages {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+}
+#allmessages::-webkit-scrollbar{
+    display: none;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#sendMessage {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+#sendMessage #who {
+    width: 20%;
+}
+
+#sendMessage #msg {
+    width: 60%;
+}
+
+.localmessage {
+    background-color: rgb(87, 82, 82);
+    color: white;
+    text-align: right;
+}
+
+.remotemessage {
+    background-color: rgb(195, 186, 186);
+}
+
+/* ========================================================= */
+/* AQUI HAY ESTILOS COMUNES PARA VARIOS ELEMENTOS DIFERENTES */
+/* ========================================================= */
+
+.basicinput {
+    border: 0;
+    padding: .5rem;
+    border-radius: 25px;
+}
+.basicinput:focus {
+    outline: none;
+}
+.mychatP {
+    width: 80%;
+    font-family: sans-serif;
+    margin: 0;
+    padding-right: .5rem;
+    padding-left: .5rem;
+}
+.message {
+    margin-top: .5rem;
+}
