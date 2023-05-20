@@ -1,0 +1,138 @@
+{
+    "examenes": [
+      {
+        "grado": "Grado en Educacion Infantil",
+        "curso": "curso1",
+        "anio": 2019,
+        "trimestre": "T1",
+        "asignatura": "Didáctica de la Educación Infantil"
+      },
+      {
+        "grado": "Grado en Mecanizado",
+        "curso": "curso2",
+        "anio": 2019,
+        "trimestre": "T2",
+        "asignatura": "Sistemas CAD-CAM"
+      },
+      {
+        "grado": "Grado en Soldadura",
+        "curso": "curso1",
+        "anio": 2020,
+        "trimestre": "T1",
+        "asignatura": "Materiales y Procesos de Soldadura"
+      },
+      {
+        "grado": "Grado en Medicina",
+        "curso": "curso2",
+        "anio": 2020,
+        "trimestre": "T2",
+        "asignatura": "Patología Médica"
+      },
+      {
+        "grado": "Grado en Desarrollo Web",
+        "curso": "curso1",
+        "anio": 2021,
+        "trimestre": "T1",
+        "asignatura": "Programación Web"
+      },
+      {
+        "grado": "Grado en Administración de Empresas",
+        "curso": "curso2",
+        "anio": 2021,
+        "trimestre": "T2",
+        "asignatura": "Recursos Humanos"
+      },
+      {
+        "grado": "Grado en Educacion Infantil",
+        "curso": "curso2",
+        "anio": 2022,
+        "trimestre": "T1",
+        "asignatura": "Educación Inclusiva"
+      },
+      {
+        "grado": "Grado en Mecanizado",
+        "curso": "curso1",
+        "anio": 2022,
+        "trimestre": "T2",
+        "asignatura": "Dibujo Técnico"
+      },
+      {
+        "grado": "Grado en Educacion Infantil",
+        "curso": "curso1",
+        "anio": 2018,
+        "trimestre": "T1",
+        "asignatura": "Didáctica de la Educación Infantil"
+      },
+      {
+        "grado": "Grado en Educacion Infantil",
+        "curso": "curso1",
+        "anio": 2018,
+        "trimestre": "T2",
+        "asignatura": "Didáctica de la Educación Infantil"
+      },
+      {
+        "grado": "Grado en Mecanizado",
+        "curso": "curso1",
+        "anio": 2018,
+        "trimestre": "T2",
+        "asignatura": "Dibujo Técnico"
+      },
+      {
+        "grado": "Grado en Mecanizado",
+        "curso": "curso1",
+        "anio": 2020,
+        "trimestre": "T1",
+        "asignatura": "Dibujo Técnico"
+      },
+      {
+        "grado": "Grado en Educacion Infantil",
+        "curso": "curso2",
+        "anio": 2022,
+        "trimestre": "T1",
+        "asignatura": "Educación Inclusiva"
+      },
+      {
+        "grado": "Grado en Mecanizado",
+        "curso": "curso1",
+        "anio": 2022,
+        "trimestre": "T2",
+        "asignatura": "Dibujo Técnico"
+      },
+      {
+        "grado": "Grado en Educacion Infantil",
+        "curso": "curso1",
+        "anio": 2018,
+        "trimestre": "T1",
+        "asignatura": "Didáctica de la Educación Infantil"
+      },
+      {
+        "grado": "Grado en Educacion Infantil",
+        "curso": "curso1",
+        "anio": 2018,
+        "trimestre": "T2",
+        "asignatura": "Didáctica de la Educación Infantil"
+      },
+      {
+        "grado": "Grado en Mecanizado",
+        "curso": "curso1",
+        "anio": 2018,
+        "trimestre": "T2",
+        "asignatura": "Dibujo Técnico"
+      },
+      {
+        "grado": "Grado en Mecanizado",
+        "curso": "curso1",
+        "anio": 2020,
+        "trimestre": "T1",
+        "asignatura": "Dibujo Técnico"
+      },
+      {
+        "grado": "Grado en Soldadura",
+        "curso": "curso1",
+        "anio": 2018,
+        "trimestre": "T2",
+        "asignatura": "Materiales y Procesos de Soldadura"
+      }
+    ]
+  }
+  

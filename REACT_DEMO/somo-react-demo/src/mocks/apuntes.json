@@ -1,0 +1,82 @@
+{
+    "apuntes": [
+        {
+            "usuario": "rocky007",
+            "grado": "Grado en Educacion Infantil",
+            "asignatura": "Didáctica de la Educación Infantil",
+            "nombre": "rocky_DI5"
+        },
+        {
+            "usuario": "anaperez",
+            "grado": "Grado en Educacion Infantil",
+            "asignatura": "Organización y Gestión de Centros Educativos",
+            "nombre": "anap_OG3"
+        },
+        {
+            "usuario": "davidsmith",
+            "grado": "Grado en Mecanizado",
+            "asignatura": "Fundamentos de Mecánica",
+            "nombre": "davids_FM10"
+        },
+        {
+            "usuario": "rocky007",
+            "grado": "Grado en Soldadura",
+            "asignatura": "Materiales y Procesos de Soldadura",
+            "nombre": "rocky_MP9"
+        },
+        {
+            "usuario": "johndoe",
+            "grado": "Grado en Medicina",
+            "asignatura": "Patología Médica",
+            "nombre": "johnd_PM4"
+        },
+        {
+            "usuario": "sarahlee",
+            "grado": "Grado en Desarrollo Web",
+            "asignatura": "Diseño Web",
+            "nombre": "sarahlee_DW2"
+        },
+        {
+            "usuario": "anaperez",
+            "grado": "Grado en Administración de Empresas",
+            "asignatura": "Recursos Humanos",
+            "nombre": "anap_RH9"
+        },
+        {
+            "usuario": "rocky007",
+            "grado": "Grado en Mecanizado",
+            "asignatura": "Dibujo Técnico",
+            "nombre": "rocky_DT5"
+        },
+        {
+            "usuario": "johndoe",
+            "grado": "Grado en Medicina",
+            "asignatura": "Bioquímica Médica",
+            "nombre": "johnd_BM5"
+        },
+        {
+            "usuario": "sarahlee",
+            "grado": "Grado en Desarrollo Web",
+            "asignatura": "Programación Web",
+            "nombre": "sarahlee_PW7"
+        },
+        {
+            "usuario": "jorge97",
+            "grado": "Grado en Educacion Infantil",
+            "asignatura": "Didáctica de la Educación Infantil",
+            "nombre": "jorge_DI10"
+        },
+        {
+            "usuario": "estrella23",
+            "grado": "Grado en Educacion Infantil",
+            "asignatura": "Psicología del Desarrollo Infantil",
+            "nombre": "estrella_PD2"
+        },
+        {
+            "usuario": "marc10",
+            "grado": "Grado en Mecanizado",
+            "asignatura": "Dibujo Técnico",
+            "nombre": "marc_DT5"
+        }
+    ]
+}

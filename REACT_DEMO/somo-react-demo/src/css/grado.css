@@ -1,0 +1,44 @@
+.gradoContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5vh;
+}
+
+.gradoAsignaturasContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gradoAsignaturasOpt,
+.gradoOpenCursoBtn {
+    cursor: pointer;
+    border-radius: 30px;
+}
+
+.gradoOpenCursoBtn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2.5vh;
+    padding-bottom: 2.5vh;
+}
+
+.gradoOpenCursoIcon {
+    padding: .25rem;
+    border-radius: 20px;
+    margin-left: 2vw;
+}
+
+.gradoAsignaturasOpt {
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+    width: 60%;
+}
+.gradoAsignaturasOpt:hover {
+    font-weight: bold;
+}

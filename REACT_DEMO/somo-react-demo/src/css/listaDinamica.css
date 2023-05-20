@@ -1,0 +1,25 @@
+.listaDinamicaContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    row-gap: 30px;
+    column-gap: 10vw;
+    padding-top: 2.5vh;
+}
+
+.listaDinamicaLink {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    place-content: space-around;
+    text-decoration: none;
+    border-radius: 30px;
+    width: 150px;
+    height: 150px;
+}
+
+.listaDinamicaSpan {
+    font-size: 14px;
+    text-align: center;
+}

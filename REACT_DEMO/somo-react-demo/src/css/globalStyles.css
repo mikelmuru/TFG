@@ -1,0 +1,435 @@
+html.light {
+    --fullContrast: black;
+
+    --mainColor1: #084b83;
+    --mainColor2: #42bfdd;
+    --mainColor3: #bbe6e4;
+
+    --btnBgAnimationColor1: #bbe6e4;
+    --btnBgAnimationColor2: white;
+    --btnBgAnimationColor3: #42bfdd;
+
+    --myAccAnimationColor1: #bbe6e4c1;
+    --myAccAnimationColor2: white;
+    --myAccAnimationColor3: #42bedd9b;
+    --myAccountPersonalInfoShadow: #bbe6e4;
+
+    --listaDiHoverGrad1: #42bedd6a;
+    --listaDiHoverGrad2: #bbe6e4ce;
+    --listaDiHoverGrad3: white;
+
+    --defaultBgColor: #ffffff;
+
+    --defaultMainTextColor: #000;
+    --defaultInfoTextColor: #222;
+    --borderColor: #e6eaea;
+
+    --borderColor2: #2e2e2e;
+
+    --iconHoverColor: #bbe6e4;
+    --hoverSecundarioIconoColor1: #42bfdd;
+    --hoverSecundarioIconoColor2: black;
+
+    --searchBarTxtAreaColor: #fff;
+    --searchBarIconColor: #000;
+    --searchBarBorderColor: #111;
+    --searchBarSelectionColor: #eee;
+    --searchBarSelectionHoverColor: #888;
+
+
+    --listaDincamicaIconColor: #2a2a2a;
+
+}
+
+html.dark {
+    --fullContrast: white;
+
+    --mainColor1: #1b263b;
+    --mainColor2: #415a77;
+    --mainColor3: #778da9;
+
+    --btnBgAnimationColor1: #1b263b;
+    --btnBgAnimationColor2: #354960;
+    --btnBgAnimationColor3: black;
+
+    --myAccAnimationColor1: #1b263bc1;
+    --myAccAnimationColor2: #35496086;
+    --myAccAnimationColor3: rgba(0, 0, 0, 0.597);
+    --myAccountPersonalInfoShadow: #415a77;
+
+    --listaDiHoverGrad1: #778da9;
+    --listaDiHoverGrad2: #415a77;
+    --listaDiHoverGrad3: #1c1c1c;
+
+    --defaultBgColor: #1c1c1c;
+    --defaultMainTextColor: #fff;
+    --defaultInfoTextColor: #b8b8b8;
+
+    --borderColor: #2e2e2e;
+    --borderColor2: #e1e1e1;
+
+    --iconHoverColor: #2c2c2c;
+    --hoverSecundarioIconoColor1: #415a77;
+    --hoverSecundarioIconoColor2: white;
+
+    --searchBarTxtAreaColor: #343434;
+    --searchBarIconColor: #dadada;
+    --searchBarBorderColor: #6a6a6a;
+    --listaDincamicaIconColor: #eaeaea;
+
+}
+
+html {
+    background-color: var(--defaultBgColor);
+}
+
+:root {
+    color: var(--defaultInfoTextColor);
+}
+
+hr, .hr {
+    height: 1px;
+    border: 0;
+    background-color: var(--borderColor);
+}
+
+.webTitle {
+    color: var(--defaultMainTextColor);
+}
+
+.menuOptionText {
+    color: var(--defaultMainTextColor);
+}
+
+.infoText {
+    color: var(--defaultInfoTextColor);
+}
+
+.headerTitle {
+    color: var(--defaultMainTextColor);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* ========================================================== */
+/* ================ ESTILOS PARA LOS MODULOS ================ */
+/* ========================================================== */
+
+/*------>>> HEADER <<<-------*/
+.contentHeader {
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0px;
+    top: 0px;
+    background-color: var(--defaultBgColor);
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+.goBackNav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+.goBackNav > .menuOptionIcon {
+    place-content: center;
+}
+.headerTitle {
+    position: absolute;
+    width: calc(100% - 50px);
+    margin-left: 25px;
+    margin-right: 25px;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+}
+
+/*------>>> SEARCHBAR <<<-------*/
+.searchBarTextArea {
+    background-color: var(--searchBarTxtAreaColor);
+}
+.searchBarTextAreaInput {
+    border: none;
+    background-color: transparent;
+    color: var(--defaultInfoTextColor);
+}
+.searchBarTextAreaInput:focus {
+    outline: none;
+}
+.searchBarTextAreaIcon {
+    color: var(--searchBarIconColor);
+}
+
+
+
+.searchBarSelectionOpt {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.searchBarSelectionOpt:hover {
+    box-shadow: 0px 0px 10px var(--mainColor3);
+    background: linear-gradient(45deg, var(--btnBgAnimationColor1), var(--btnBgAnimationColor2), var(--btnBgAnimationColor3));
+    background-size: 250% 250%;
+    animation: archivoBgMove 3s ease-in-out infinite;
+    color: var(--defaultMainTextColor);
+}
+
+
+/*------>>> CONTENT <<<-------*/
+.moduloContent > p {
+    margin: 0px;
+}
+
+/*------>>> ListaDinamica <<<-------*/
+.listaDinamicaLink {
+    background-color: transparent;
+}
+.listaDinamicaLink:hover {
+    background: radial-gradient(var(--listaDiHoverGrad1) 0, var(--listaDiHoverGrad2) 0, var(--listaDiHoverGrad3) 75%);
+}
+.listaDinamicaIcon {
+    color: var(--listaDincamicaIconColor);
+}
+.listaDinamicaSpan {
+    color: var(--defaultInfoTextColor);
+}
+.listaDinamicaLink:hover > .listaDinamicaSpan {
+    color: var(--defaultMainTextColor);
+}
+
+/*------>>> Grado <<<-------*/
+.gradoOpenCursoBtn {
+    background-color: transparent;
+    color: var(--defaultInfoTextColor);
+    border: none;
+    border: .25px solid var(--borderColor2);
+    margin-top: 1vh;
+}
+.gradoOpenCursoBtn:hover {
+    color: var(--defaultMainTextColor);
+}
+
+.gradoOpenCursoBtn:hover {
+    background: linear-gradient(to right, var(--btnBgAnimationColor2), var(--btnBgAnimationColor1), var(--btnBgAnimationColor2));
+}
+
+.gradoAsignaturasOpt {
+    border: none;
+    background-color: transparent;
+    color: var(--defaultInfoTextColor);
+}
+.gradoAsignaturasOpt:hover {
+    color: var(--defaultMainTextColor);
+}
+
+
+/*------>>> UsuarioApuntes <<<-------*/
+.apuntesUsuarioTitle b {
+    color: var(--defaultMainTextColor);
+}
+.apuntesUsuarioApunte:hover {
+    box-shadow: 0px 0px 10px var(--mainColor3);
+    background: linear-gradient(45deg, var(--btnBgAnimationColor1), var(--btnBgAnimationColor2), var(--btnBgAnimationColor3));
+    background-size: 250% 250%;
+    animation: archivoBgMove 3s ease-in-out infinite;
+    color: var(--defaultMainTextColor);
+}
+
+
+/*------>>> Asignatura <<<-------*/
+.asignaturaTitle span b {
+    color: var(--defaultMainTextColor);
+}
+.asignaturaDataElement:hover {
+    box-shadow: 0px 0px 10px var(--mainColor3);
+    background: linear-gradient(45deg, var(--btnBgAnimationColor1), var(--btnBgAnimationColor2), var(--btnBgAnimationColor3));
+    background-size: 250% 250%;
+    animation: archivoBgMove 3s ease-in-out infinite;
+    color: var(--defaultMainTextColor);
+}
+
+
+/*------>>> Archivo <<<-------*/
+.archivoContainer {
+    box-shadow: 0px 0px 10px var(--mainColor3);
+    border: .5px solid var(--borderColor);
+}
+.archivoHeaderIconContainer,
+.archivoTitle {
+    color: var(--fullContrast);
+}
+.archivoInfoDato {
+    border-bottom: .5px solid var(--borderColor2);
+}
+.archivoDownloadContainer:hover {
+    box-shadow: 0px 0px 15px var(--mainColor3);
+    background: linear-gradient(45deg, var(--btnBgAnimationColor1), var(--btnBgAnimationColor2), var(--btnBgAnimationColor3));
+    background-size: 250% 250%;
+    animation: archivoBgMove 3s ease-in-out infinite;
+    color: var(--defaultMainTextColor);
+}
+
+
+/*------>>> My Account <<<-------*/
+.myAccountContainer {
+    background: linear-gradient(45deg, var(--myAccAnimationColor1), var(--myAccAnimationColor2), var(--myAccAnimationColor3));
+    background-size: 250% 250%;
+    animation: archivoBgMove 5s ease-in-out infinite;
+    color: var(--defaultMainTextColor);
+}
+.myAccountPersonalInfo,
+.myAccountApuntes {
+    background-color: var(--defaultBgColor);
+}
+.myAccountPersonalInfoDato,
+.apuntesOpenBtn {
+    color: var(--fullContrast);
+    border-bottom: 1px solid var(--borderColor2);
+}
+.myAccountHeadTitle {
+    border: none;
+}
+
+.canWrite {
+    animation: inputHabilitado 2s ease-in-out infinite;
+}
+
+.apuntesOpenBtn {
+    border: none;
+    background-color: transparent;
+}
+.apuntesUnidad {
+    color: var(--defaultInfoTextColor);
+}
+.apuntesUnidadOpt:hover {
+    color: var(--fullContrast);
+}
+
+.apuntesAddNew {
+    box-shadow: 0px 0px 10px var(--mainColor3);
+    background-color: var(--defaultBgColor);
+    /* background: linear-gradient(45deg, var(--btnBgAnimationColor1), var(--btnBgAnimationColor2), var(--btnBgAnimationColor3));
+    background-size: 250% 250%;
+    animation: archivoBgMove 3s ease-in-out infinite;
+    color: var(--defaultMainTextColor); */
+}
+
+/*------>>> Pop Up <<<-------*/
+.popUpForm {
+    background-color: var(--defaultBgColor);
+    box-shadow: 0px 0px 5px var(--mainColor3);
+}
+.formOptTitle {
+    border-bottom: .5px solid var(--borderColor2);
+}
+.formDropDownBtn {
+    background-color: transparent;
+    border: none;
+    box-shadow: 0px 0px 5px var(--mainColor3);
+    color: var(--fullContrast);
+}
+.formOpt:hover {
+    font-weight: bold;
+}
+.updateNameInput {
+    box-shadow: 0px 0px 5px var(--mainColor3);
+    border: none;
+    background-color: var(--defaultBgColor);
+    color: var(--fullContrast);
+}
+.uploadContainer {
+    box-shadow: 0px 0px 10px var(--mainColor3);
+    background: linear-gradient(45deg, var(--btnBgAnimationColor1), var(--btnBgAnimationColor2), var(--btnBgAnimationColor3));
+    background-size: 250% 250%;
+    animation: archivoBgMove 3s ease-in-out infinite;
+    color: var(--defaultMainTextColor);
+}
+.myAccountHr {
+    background: linear-gradient(to right, var(--defaultBgColor), var(--fullContrast), var(--defaultBgColor));
+    background-size: 200% 200%;
+    animation: hrColorMove 4s ease-in-out infinite;
+}
+
+
+/* ================================================================= */
+/* =================== ESTILOS CLASES GLOBALES ===================== */
+/* ================================================================= */
+.hoverSecundarioIcono:hover {
+    background: radial-gradient(var(--hoverSecundarioIconoColor1) 0, var(--defaultBgColor) 75%);
+    color: var(--hoverSecundarioIconoColor2);
+}
+
+
+
+/* ================================================================= */
+/* ================ ESTILOS PARA ELEMENTOS DEL MENU ================ */
+/* ================================================================= */
+
+.menuOption:hover,
+.themeHandleBtn:hover {
+    background-color: var(--iconHoverColor);
+}
+
+@media (max-width: 900px) {
+    .menuOptionLabel {
+        display: none;
+    }
+    .menuOption {
+        justify-content: center;
+    }
+}
+@media (max-width: 1500px) {
+    .appMenuDer .menuOptionLabel {
+        display: none;
+    }
+
+    .appMenuDer .menuOption {
+        justify-content: center;
+    }
+}
+
+
+/* ======================================= */
+/* ============= ANIMACIONES ============= */
+
+@keyframes archivoBgMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+@keyframes hrColorMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+@keyframes inputHabilitado {
+    0% {
+        box-shadow: 0px 0px 0px transparent;
+    }
+    50% {
+        box-shadow: 0px 0px 10px var(--myAccountPersonalInfoShadow);
+    }
+    100% {
+        box-shadow: 0px 0px 0px transparent;
+    }
+}

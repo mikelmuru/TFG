@@ -1,0 +1,93 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nickname": "rocky007",
+      "nombre": "Rocky",
+      "apellidos": "Balboa Gomez",
+      "mail": "rocky@gmail.com",
+      "role": "user",
+      "cod": "rocky007"
+    },
+    {
+      "nickname": "anaperez",
+      "nombre": "Ana",
+      "cod": "anaperez"
+    },
+    {
+      "nickname": "davidsmith",
+      "nombre": "David",
+      "cod": "davidsmith"
+    },
+    {
+      "nickname": "johndoe",
+      "nombre": "John",
+      "cod": "johndoe"
+    },
+    {
+      "nickname": "sarahlee",
+      "nombre": "Sarah",
+      "cod": "sarahlee"
+    },
+    {
+      "nickname": "jorge97",
+      "nombre": "Jorge",
+      "cod": "jorge97"
+    },
+    {
+      "nickname": "estrella23",
+      "nombre": "Estrella",
+      "cod": "estrella23"
+    },
+    {
+      "nickname": "marc10",
+      "nombre": "Marc",
+      "cod": "marc10"
+    },
+    {
+      "nickname": "alba25",
+      "nombre": "Alba",
+      "cod": "alba25"
+    },
+    {
+      "nickname": "pablo78",
+      "nombre": "Pablo",
+      "cod": "pablo78"
+    },
+    {
+      "nickname": "ana89",
+      "nombre": "Ana",
+      "cod": "ana89"
+    },
+    {
+      "nickname": "luisa12",
+      "nombre": "Luisa",
+      "cod": "luisa12"
+    },
+    {
+      "nickname": "julia21",
+      "nombre": "Julia",
+      "cod": "julia21"
+    },
+    {
+      "nickname": "maria56",
+      "nombre": "Maria",
+      "cod": "maria56"
+    },
+    {
+      "nickname": "jose34",
+      "nombre": "Jose",
+      "cod": "jose34"
+    },
+    {
+      "nickname": "lucas67",
+      "nombre": "Lucas",
+      "cod": "lucas67"
+    },
+    {
+      "nickname": "laura90",
+      "nombre": "Laura",
+      "cod": "laura90"
+    }
+  ]
+}

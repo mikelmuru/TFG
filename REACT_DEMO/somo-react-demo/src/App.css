@@ -1,0 +1,89 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  place-content: center;
+  max-width: 85vw;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+/* ESTILOS PARA EL 'HEADER' */
+.appHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  width: 90%;
+}
+
+.webTitleText {
+  background: linear-gradient(45deg, #42bfdd, #007ea7, #084b83);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.webTitle {
+  margin: 0px;
+  margin-left: 2.5vw;
+  width: 30%;
+  text-align: left;
+}
+
+
+.hr {
+  margin-top: 0px;
+}
+
+/* 
+  CONTENEDOR PADRE DEL CONTENIDO COMPLETO DE LA APP
+  MENUS LATERALES Y CONTENIDO SELECCIONADO CENTRAL
+*/
+.fullApp {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+/* ESTILOS PARA LA CAJA DEL CONTENIDO SELECCIONADO */
+.appElement {
+  max-height: 85vh;
+}
+
+/* ESTILOS PARA LAS CAJAS PADRES DE LOS MENUS LATERALES */
+.appMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+  width: 15vw;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+  padding-top: 2.5vh;
+  padding-bottom: 2.5vh;
+  overflow: scroll;
+}
+
+.appMenu::-webkit-scrollbar {
+  display: none;
+}
+
+.appContent {
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
+  width: 70vw;
+  height: 100vh;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
+  overflow: scroll;
+}
+
+.appContent::-webkit-scrollbar {
+  display: none;
+}
+
+

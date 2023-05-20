@@ -1,0 +1,16 @@
+{
+    "ias": [
+        {
+            "nombre": "chatgpt",
+            "urlconnection": "url al micro chatgpt",
+            "descripcion": "Una descripcion cualquiera ChatGPT",
+            "cod": "chatgpt"
+        },
+        {
+            "nombre": "dall-e",
+            "urlconnection": "url al micro de dall-e",
+            "descripcion": "Una descripcion cualquiera DALL-E",
+            "cod": "dalle"
+        }
+    ]
+}

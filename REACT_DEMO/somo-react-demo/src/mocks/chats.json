@@ -1,0 +1,28 @@
+{
+  "chats": [
+    {
+      "nombre": "Grado en Educacion Infantil",
+      "cod": "GEI-123"
+    },
+    {
+      "nombre": "Grado en Mecanizado",
+      "cod": "GM-145"
+    },
+    {
+      "nombre": "Grado en Soldadura",
+      "cod": "GS-123"
+    },
+    {
+      "nombre": "Grado en Medicina",
+      "cod": "GM-187"
+    },
+    {
+      "nombre": "Grado en Desarrollo Web",
+      "cod": "GDW-133"
+    },
+    {
+      "nombre": "Grado en Administración de Empresas",
+      "cod": "GAE-167"
+    }
+  ]
+}
