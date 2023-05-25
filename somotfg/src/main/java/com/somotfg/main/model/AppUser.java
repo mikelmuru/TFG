@@ -1,5 +1,6 @@
 package com.somotfg.main.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,11 +18,14 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // EL USERNAME LO CREARA EL MICROSERVICIO AUTOMATICAMENTE AL REGISTRAR EL USUARIO.
-    // USERNAME = NOMBRE+INICIAL_APELLIDO_1+INICIAL_APELLIDO_2+NUMERO_ALETORIO(0-50)
+    @Column(unique = true)
     private String username;
+    
     private String nombre;
     private String apellido;
-    private Integer edad;
-    private Grado grado;
+    private String mail;
+    private String role;
+    private String password;
+
+    private Boolean eliminado;
 }

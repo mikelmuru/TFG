@@ -2,10 +2,14 @@ package com.somotfg.main.model;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +23,18 @@ public class Examen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String descripcion;
-    private Grado grado;
+    @Column(unique = true)
+    private String cod;
+
+    @ManyToOne
+    private AppUser autor;
+
+    @ManyToOne
+    private Asignatura asignatura;
+
+    @Temporal(TemporalType.DATE)
     private Date fecha;
+
+    @Column(unique = true)
+    private String refS3;
 }

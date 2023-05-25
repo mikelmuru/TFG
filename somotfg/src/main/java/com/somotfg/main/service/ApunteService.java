@@ -16,22 +16,22 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.somotfg.main.dto.ApunteDTO;
 import com.somotfg.main.dto.AsignaturaDTO;
-import com.somotfg.main.dto.ExamenDTO;
 import com.somotfg.main.model.AppUser;
+import com.somotfg.main.model.Apunte;
 import com.somotfg.main.model.Asignatura;
-import com.somotfg.main.model.Examen;
 import com.somotfg.main.repository.AppUserRepository;
+import com.somotfg.main.repository.ApuntesRepository;
 import com.somotfg.main.repository.AsignaturaRepository;
-import com.somotfg.main.repository.ExamenRepository;
-import com.somotfg.main.service.interfaze.IExamenService;
+import com.somotfg.main.service.interfaze.IApunteService;
 import com.somotfg.main.util.response.GenericResponse;
 
 @Service
-public class ExamenService implements IExamenService {
+public class ApunteService implements IApunteService {
 
     @Autowired
-    private ExamenRepository repository;
+    private ApuntesRepository repository;
 
     @Autowired
     private AppUserRepository userRepository;
@@ -45,38 +45,40 @@ public class ExamenService implements IExamenService {
 
     private Logger log = LoggerFactory.getLogger(AppUserService.class);
 
-    public ExamenService() {
+    public ApunteService() {
         this.modelMapper = new ModelMapper();
     }
 
     // ===================****PRIVATE METHODS****===================
-    private ExamenDTO model2dto(Examen model) {
-        ExamenDTO dto = modelMapper.map(model, ExamenDTO.class);
-    
+    private ApunteDTO model2dto(Apunte model) {
+        ApunteDTO dto = new ApunteDTO();
+        dto = modelMapper.map(model, ApunteDTO.class);
+
         dto.setGradoCod(model.getAsignatura().getGrado().getCod());
         dto.setGradoNombre(model.getAsignatura().getGrado().getNombre());
         dto.setAsignaturaCod(model.getAsignatura().getCod());
         dto.setAsignaturaNombre(model.getAsignatura().getNombre());
         dto.setAutor(model.getAutor().getUsername());
-    
+
         return dto;
     }
-    
-    private Examen dto2model(ExamenDTO dto) {
-        Examen model = modelMapper.map(dto, Examen.class);
-    
+
+    private Apunte dto2model(ApunteDTO dto) {
+        Apunte model = new Apunte();
+        model = modelMapper.map(dto, Apunte.class);
+
         Optional<AppUser> autor = userRepository.findByUsername(dto.getAutor());
         Optional<Asignatura> asignatura = asignaturaRepository.findByCod(dto.getAsignaturaCod());
         if (autor.isPresent() && asignatura.isPresent()) {
             model.setAutor(autor.get());
             model.setAsignatura(asignatura.get());
         }
-    
+
         return model;
     }
-    
-    private ExamenDTO update (ExamenDTO original, ExamenDTO nuevo) {
-        Class<ExamenDTO> clase = ExamenDTO.class;
+
+    private ApunteDTO update (ApunteDTO original, ApunteDTO nuevo) {
+        Class<ApunteDTO> clase = ApunteDTO.class;
         Field[] campos = clase.getDeclaredFields();
 
         for (Field campo : campos) {
@@ -96,10 +98,10 @@ public class ExamenService implements IExamenService {
         return original;
     }
 
-    private GenericResponse<ExamenDTO> save(Examen apunte) {
-        GenericResponse<ExamenDTO> isSaved = new GenericResponse<>();
+    private GenericResponse<ApunteDTO> save(Apunte apunte) {
+        GenericResponse<ApunteDTO> isSaved = new GenericResponse<>();
         try {
-            Examen saved = repository.save(apunte);
+            Apunte saved = repository.save(apunte);
             isSaved.setResult(model2dto(saved));
             isSaved.setMessage("CREATED");
             isSaved.setCode(201);
@@ -111,16 +113,18 @@ public class ExamenService implements IExamenService {
         return isSaved;
     }
 
+    // ===================****PUBLIC METHODS****===================
+
     // ===================****SEARCH METHODS****===================
     @Override
-    public GenericResponse<List<ExamenDTO>> searchPagination(Integer offset, Integer pageSize) throws Exception {
+    public GenericResponse<List<ApunteDTO>> searchPagination(Integer offset, Integer pageSize) throws Exception {
         Pageable pageable = PageRequest.of(offset, pageSize);
-        List<Examen> exams = repository.findAll(pageable).toList();
-        GenericResponse<List<ExamenDTO>> result = new GenericResponse<>();
+        List<Apunte> apuntes = repository.findAll(pageable).toList();
+        GenericResponse<List<ApunteDTO>> result = new GenericResponse<>();
 
-        List<ExamenDTO> helper = new ArrayList<>();
-        for (Examen exam : exams) {
-            helper.add(model2dto(exam));
+        List<ApunteDTO> helper = new ArrayList<>();
+        for (Apunte apunte : apuntes) {
+            helper.add(model2dto(apunte));
         }
 
         result.setResult(helper);
@@ -131,17 +135,17 @@ public class ExamenService implements IExamenService {
     }
 
     @Override
-    public GenericResponse<List<ExamenDTO>> searchPaginationSorting(Integer offset, Integer pageSize, String fieldSort)
+    public GenericResponse<List<ApunteDTO>> searchPaginationSorting(Integer offset, Integer pageSize, String fieldSort)
             throws Exception {
 
-        GenericResponse<List<ExamenDTO>> result = new GenericResponse<>();
+        GenericResponse<List<ApunteDTO>> result = new GenericResponse<>();
         try {
             Pageable pageable = PageRequest.of(offset, pageSize).withSort(Sort.by(fieldSort));
-            List<Examen> exams = repository.findAll(pageable).getContent();
+            List<Apunte> apuntes = repository.findAll(pageable).getContent();
 
-            List<ExamenDTO> helper = new ArrayList<>();
-            for (Examen exam : exams) {
-                helper.add(model2dto(exam));
+            List<ApunteDTO> helper = new ArrayList<>();
+            for (Apunte apunte : apuntes) {
+                helper.add(model2dto(apunte));
             }
             result.setResult(helper);
             result.setMessage("SUCCESS");
@@ -155,12 +159,12 @@ public class ExamenService implements IExamenService {
     }
 
     @Override
-    public GenericResponse<ExamenDTO> searchById(Long id) throws Exception {
-        GenericResponse<ExamenDTO> result = new GenericResponse<>();
-        Optional<Examen> exam = repository.findById(id);
+    public GenericResponse<ApunteDTO> searchById(Long id) throws Exception {
+        GenericResponse<ApunteDTO> result = new GenericResponse<>();
+        Optional<Apunte> grado = repository.findById(id);
 
-        if (exam.isPresent()) {
-            result.setResult(model2dto(exam.get()));
+        if (grado.isPresent()) {
+            result.setResult(model2dto(grado.get()));
             result.setMessage("SUCCESS");
             result.setCode(200);
         } else {
@@ -172,24 +176,24 @@ public class ExamenService implements IExamenService {
     }
 
     @Override
-    public GenericResponse<List<ExamenDTO>> searchByUsername(String username) throws Exception {
-        GenericResponse<List<ExamenDTO>> result = new GenericResponse<>();
-        Optional<AppUser> author = userRepository.findByUsername(username);
-        List<ExamenDTO> examsDto = new ArrayList<>();
+    public GenericResponse<List<ApunteDTO>> searchByUsername(String username) throws Exception {
+        GenericResponse<List<ApunteDTO>> result = new GenericResponse<>();
+        Optional<AppUser> autor = userRepository.findByUsername(username);
+        List<ApunteDTO> apuntesdto = new ArrayList<>();
 
-        if (author.isPresent()) {
-            List<Examen> exams = repository.findByAutor(author.get());
-            for (Examen exam : exams) {
-                ExamenDTO dto = model2dto(exam);
-                examsDto.add(dto);
+        if (autor.isPresent()) {
+            List<Apunte> apuntes = repository.findByAutor(autor.get());
+            for (Apunte apunte : apuntes) {
+                ApunteDTO dto = model2dto(apunte);
+                apuntesdto.add(dto);
             }
         }
 
-        if (examsDto.size() == 0) {
+        if (apuntesdto.size() == 0) {
             result.setMessage("NOT FOUND");
             result.setCode(404);
         } else {
-            result.setResult(examsDto);
+            result.setResult(apuntesdto);
             result.setMessage("SUCCESS");
             result.setCode(200);
         }
@@ -198,16 +202,16 @@ public class ExamenService implements IExamenService {
     }
 
     @Override
-    public GenericResponse<List<ExamenDTO>> searchByAsignatura(AsignaturaDTO asignatura) throws Exception {
-        GenericResponse<List<ExamenDTO>> result = new GenericResponse<>();
+    public GenericResponse<List<ApunteDTO>> searchByAsignatura(AsignaturaDTO asignatura) throws Exception {
+        GenericResponse<List<ApunteDTO>> result = new GenericResponse<>();
         Asignatura asignaturamodel = modelMapper.map(asignatura, Asignatura.class);
-        List<ExamenDTO> dtos = new ArrayList<>();
+        List<ApunteDTO> dtos = new ArrayList<>();
 
-        // List<Examen> examenes = repository.findByAsignatura(asignaturamodel);
-        List<Examen> examenes = repository.findByAsignaturaCod(asignaturamodel.getCod());
-        for (Examen examen : examenes) {
-            // ExamenDTO dto = modelMapper.map(examen, ExamenDTO.class);
-            ExamenDTO dto = model2dto(examen);
+        // List<Apunte> apuntes = repository.findByAsignatura(asignaturamodel);
+        List<Apunte> apuntes = repository.findByAsignaturaCod(asignaturamodel.getCod());
+        for (Apunte apunte : apuntes) {
+            // ApunteDTO dto = modelMapper.map(apunte, ApunteDTO.class);
+            ApunteDTO dto = model2dto(apunte);
             dtos.add(dto);
         }
 
@@ -224,17 +228,17 @@ public class ExamenService implements IExamenService {
     }
 
     @Override
-    public GenericResponse<List<ExamenDTO>> searchByFiltro(String filter) throws Exception {
-        GenericResponse<List<ExamenDTO>> result = new GenericResponse<>();
+    public GenericResponse<List<ApunteDTO>> searchByFiltro(String filtro) throws Exception {
+        GenericResponse<List<ApunteDTO>> result = new GenericResponse<>();
 
-        List<Examen> exams = repository.findByFiltro(filter);
-        List<ExamenDTO> dtos = new ArrayList<>();
-        for (Examen exam : exams) {
-            dtos.add(model2dto(exam));
+        List<Apunte> apuntes = repository.findByFiltro(filtro);
+        List<ApunteDTO> dtos = new ArrayList<>();
+        for (Apunte apunte : apuntes) {
+            dtos.add(model2dto(apunte));
         }
         result.setResult(dtos);
 
-        if (exams.size() == 0) {
+        if (apuntes.size() == 0) {
             result.setMessage("NOT FOUND");
             result.setCode(404);
         } else {
@@ -245,21 +249,24 @@ public class ExamenService implements IExamenService {
         return result;
     }
 
+    // ===================****CREATE METHODS****===================
+
+    // cuando se implemente la conexion con s3 actualizar para procesar el multipart y enviarlo a s3 y recibir la referencia
     @Override
-    public GenericResponse<ExamenDTO> create(ExamenDTO examData, MultipartFile file) throws Exception {
-        GenericResponse<ExamenDTO> result = new GenericResponse<>();
-        GenericResponse<ExamenDTO> saved = new GenericResponse<>();
+    public GenericResponse<ApunteDTO> create(ApunteDTO apunteData, MultipartFile file) throws Exception {
+        GenericResponse<ApunteDTO> result = new GenericResponse<>();
+        GenericResponse<ApunteDTO> saved = new GenericResponse<>();
         String refS3 = "";
 
         Date actual = new Date();
-        examData.setFecha(actual);
+        apunteData.setFecha(actual);
 
         try {
-            saved = save(dto2model(examData));
+            saved = save(dto2model(apunteData));
             if (saved.getCode() == 201) {
-                refS3 = s3Service.uploadFile(file, examData.getCod());
+                refS3 = s3Service.uploadFile(file, apunteData.getCod());
                 if (refS3 != "") {
-                    ExamenDTO dtoWithS3 = new ExamenDTO();
+                    ApunteDTO dtoWithS3 = new ApunteDTO();
                     dtoWithS3.setRefS3(refS3);
                     saved.setResult(update(saved.getResult(), dtoWithS3));
                     save(dto2model(saved.getResult()));
@@ -269,15 +276,15 @@ public class ExamenService implements IExamenService {
                 }
             }
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            log.error(e.getMessage());
         }
 
         if (saved.getCode() == 201) {
             result.setResult(saved.getResult());
-            result.setMessage("TODOS LOS EXÁMENES REGISTRADOS");
+            result.setMessage("TODOS LOS APUNTES REGISTRADOS");
             result.setCode(201);
         } else {
-            result.setMessage("ERROR AL REGISTRAR EXÁMENES");
+            result.setMessage("ERROR AL REGISTRAR APUNTES");
             result.setCode(500);
         }
 
@@ -286,13 +293,15 @@ public class ExamenService implements IExamenService {
 
     // ===================****UPDATE METHODS****===================
     @Override
-    public GenericResponse<ExamenDTO> update(ExamenDTO newdata) throws Exception {
-        Optional<Examen> exam = repository.findById(newdata.getId());
-        GenericResponse<ExamenDTO> result = new GenericResponse<>();
-        if (exam.isPresent()) {
-            ExamenDTO original = model2dto(exam.get());
-            ExamenDTO fullNewData = update(original, newdata);
-            Examen entity = dto2model(fullNewData);
+    public GenericResponse<ApunteDTO> update(ApunteDTO newdata) throws Exception {
+        Optional<Apunte> apunte = repository.findById(newdata.getId());
+        GenericResponse<ApunteDTO> result = new GenericResponse<>();
+        if (apunte.isPresent()) {
+            ApunteDTO original = model2dto(apunte.get());
+            ApunteDTO fullNewData = update(original,newdata);
+            log.info("NEW INFO:   " + fullNewData.toString());
+            Apunte entity = dto2model(fullNewData);
+            log.info("NEW ENTITY TO SAVE:    " + entity.toString());
             result = save(entity);
         }
         return result;
@@ -302,26 +311,26 @@ public class ExamenService implements IExamenService {
 
     // Delete multiple por ids
     @Override
-    public GenericResponse<List<ExamenDTO>> deleteById(List<Long> ids) throws Exception {
-        GenericResponse<List<ExamenDTO>> result = new GenericResponse<>();
-        List<ExamenDTO> examsDeleted = new ArrayList<>();
+    public GenericResponse<List<ApunteDTO>> deleteById(List<Long> ids) throws Exception {
+        GenericResponse<List<ApunteDTO>> result = new GenericResponse<>();
+        List<ApunteDTO> apuntesDeleted = new ArrayList<>();
 
         for (Long id : ids) {
-            Optional<Examen> exam = repository.findById(id);
-            if (exam.isPresent()) {
-                ExamenDTO dto = new ExamenDTO();
+            Optional<Apunte> apunte = repository.findById(id);
+            if (apunte.isPresent()) {
+                ApunteDTO dto = new ApunteDTO();
                 repository.deleteById(id);
-                s3Service.deleteFile(exam.get().getRefS3());
-                dto = model2dto(exam.get());
-                examsDeleted.add(dto);
+                s3Service.deleteFile(apunte.get().getRefS3());
+                dto = model2dto(apunte.get());
+                apuntesDeleted.add(dto);
             }
         }
-        result.setResult(examsDeleted);
-        if (examsDeleted.size() == ids.size()) {
-            result.setMessage("TODOS LOS EXÁMENES ELIMINADOS");
+        result.setResult(apuntesDeleted);
+        if (apuntesDeleted.size() == ids.size()) {
+            result.setMessage("TODOS LOS APUNTES ELIMINADOS");
             result.setCode(200);
         } else {
-            result.setMessage("ERROR AL ELIMINAR EXÁMENES");
+            result.setMessage("ERROR AL ELIMINAR APUNTES");
             result.setCode(500);
         }
         return result;

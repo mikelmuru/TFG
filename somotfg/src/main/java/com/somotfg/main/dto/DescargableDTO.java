@@ -5,10 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class GradoDTO {
-    private Long id;
-    private String cod;
-    private String nombre;
+@NoArgsConstructor
+public class DescargableDTO {
+    
+    private byte[] bytes;
 }

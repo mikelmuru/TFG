@@ -16,106 +16,99 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.somotfg.main.dto.GradoDTO;
-import com.somotfg.main.service.GradoService;
+import com.somotfg.main.dto.AsignaturaDTO;
+import com.somotfg.main.service.AsignaturaService;
 import com.somotfg.main.util.response.GenericResponse;
 
 @RestController
-@RequestMapping("/somotfg/grado")
+@RequestMapping("/somotfg/asignatura")
 @CrossOrigin(origins = "*", methods = {
         RequestMethod.GET,
         RequestMethod.POST,
         RequestMethod.DELETE,
         RequestMethod.PUT
 })
-public class GradoController {
+public class AsignaturaController {
 
     @Autowired
-    GradoService gradoService;
+    AsignaturaService asignaturaService;
 
-    private Logger log = LoggerFactory.getLogger(GradoController.class);
+    private Logger log = LoggerFactory.getLogger(AsignaturaController.class);
 
-    // ====================== METODOS GET ======================
+    // ====================== METODOS POST ======================
     @GetMapping("/getall")
-    public ResponseEntity<GenericResponse<List<GradoDTO>>> getAll(
+    public ResponseEntity<GenericResponse<List<AsignaturaDTO>>> getAll(
             @RequestParam(required = false, defaultValue = "0") Integer pageN,
             @RequestParam(required = false, defaultValue = "10") Integer counts,
             @RequestParam(required = false) String fieldSort) throws Exception {
         log.info("Entro al metodo getAll.");
 
-        GenericResponse<List<GradoDTO>> response = new GenericResponse<>();
+        GenericResponse<List<AsignaturaDTO>> response = new GenericResponse<>();
 
         if (fieldSort != null) {
             log.info("Entro a la opcion searchPagination&Sorting.");
-            response = gradoService.searchPaginationSorting(pageN, counts, fieldSort);
+            response = asignaturaService.searchPaginationSorting(pageN, counts, fieldSort);
         } else {
             log.info("Entro a la opcion searchPagination.");
-            response = gradoService.searchPagination(pageN, counts);
+            response = asignaturaService.searchPagination(pageN, counts);
         }
 
         return ResponseEntity.status(response.getCode()).body(response);
     }
 
-    @GetMapping("/getbyid")
-    public ResponseEntity<GenericResponse<GradoDTO>> getById(@RequestParam("userId") Long userId) throws Exception {
-        log.info("Entro al metodo getById.");
+    @GetMapping("/getbygrado")
+    public ResponseEntity<GenericResponse<List<AsignaturaDTO>>> getByGrado(@RequestParam("gradocod") String gradocod) throws Exception {
+        log.info("Entro al metodo getByGrado");
 
-        GenericResponse<GradoDTO> response = new GenericResponse<>();
-        response = gradoService.searchById(userId);
-
-        return ResponseEntity.status(response.getCode()).body(response);
-    }
-
-    @GetMapping("/getbycod")
-    public ResponseEntity<GenericResponse<GradoDTO>> getByCod(@RequestParam("cod") String cod)
-            throws Exception {
-        log.info("Entro al metodo getByCod.");
-
-        GenericResponse<GradoDTO> response = new GenericResponse<>();
-        response = gradoService.searchByCod(cod);
+        GenericResponse<List<AsignaturaDTO>> response = new GenericResponse<>();
+        response = asignaturaService.searchByGrado(gradocod);
 
         return ResponseEntity.status(response.getCode()).body(response);
     }
 
     @GetMapping("/getbyfiltro")
-    public ResponseEntity<GenericResponse<List<GradoDTO>>> getByFiltro(@RequestParam("filtro") String filtro)
+    public ResponseEntity<GenericResponse<List<AsignaturaDTO>>> getByFiltro(@RequestParam("filtro") String filtro)
             throws Exception {
         log.info("Entro al metodo getByFiltro.");
 
-        GenericResponse<List<GradoDTO>> response = new GenericResponse<>();
-        response = gradoService.searchByFiltro(filtro);
+        GenericResponse<List<AsignaturaDTO>> response = new GenericResponse<>();
+        response = asignaturaService.searchByFiltro(filtro);
 
         return ResponseEntity.status(response.getCode()).body(response);
     }
 
+
     // ====================== METODOS POST ======================
     @PostMapping("/create")
-    public ResponseEntity<GenericResponse<List<GradoDTO>>> createGrado(@RequestBody List<GradoDTO> newGrado) throws Exception {
-        log.info("Entro al metodo createGrado.");
+    public ResponseEntity<GenericResponse<List<AsignaturaDTO>>> createAsignatura(
+            @RequestBody List<AsignaturaDTO> newAsignatura) throws Exception {
+        log.info("Entro al metodo createAsignatura.");
 
-        GenericResponse<List<GradoDTO>> response = new GenericResponse<>();
-        response = gradoService.create(newGrado);
+        GenericResponse<List<AsignaturaDTO>> response = new GenericResponse<>();
+        response = asignaturaService.create(newAsignatura);
 
         return ResponseEntity.status(response.getCode()).body(response);
     }
 
     @PostMapping("/update")
-    public ResponseEntity<GenericResponse<GradoDTO>> updateGrado(@RequestBody GradoDTO newDataGrado) throws Exception {
-        log.info("Entro al metodo updateGrado.");
+    public ResponseEntity<GenericResponse<AsignaturaDTO>> updateAsignatura(@RequestBody AsignaturaDTO newDataAsignatura)
+            throws Exception {
+        log.info("Entro al metodo updateAsignatura.");
 
-        GenericResponse<GradoDTO> response = new GenericResponse<>();
-        response = gradoService.update(newDataGrado);
+        GenericResponse<AsignaturaDTO> response = new GenericResponse<>();
+        response = asignaturaService.update(newDataAsignatura);
 
         return ResponseEntity.status(response.getCode()).body(response);
     }
 
     // ====================== METODOS DELETE ======================
     @DeleteMapping("/deletebyid")
-    public ResponseEntity<GenericResponse<List<GradoDTO>>> deleteById(@RequestBody List<Long> userId) throws Exception {
+    public ResponseEntity<GenericResponse<List<AsignaturaDTO>>> deleteById(@RequestBody List<Long> asignaturaIds)
+            throws Exception {
         log.info("Entro al metodo deleteById.");
 
-        GenericResponse<List<GradoDTO>> response = new GenericResponse<>();
-        response = gradoService.deleteById(userId);
+        GenericResponse<List<AsignaturaDTO>> response = new GenericResponse<>();
+        response = asignaturaService.deleteById(asignaturaIds);
 
         return ResponseEntity.status(response.getCode()).body(response);
     }
@@ -125,7 +118,7 @@ public class GradoController {
         log.info("Entro al metodo deleteAll.");
 
         GenericResponse<String> response = new GenericResponse<>();
-        response = gradoService.deleteAll();
+        response = asignaturaService.deleteAll();
 
         return ResponseEntity.status(response.getCode()).body(response);
     }

@@ -1,23 +1,31 @@
 package com.somotfg.main.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-public class UserApuntes {
+public class Asignatura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String titulo;
+    @Column(unique = true)
+    private String cod;
+    private String nombre;
+
+    @ManyToOne
     private Grado grado;
-    private String descripcion;
+    
+    private Integer curso;
 }
+

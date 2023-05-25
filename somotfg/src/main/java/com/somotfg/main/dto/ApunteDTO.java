@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExamenDTO {
+public class ApunteDTO {
     private Long id;
     
     private String cod;

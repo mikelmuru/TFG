@@ -5,23 +5,30 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.somotfg.main.dto.AppUserDTO;
+import com.somotfg.main.util.response.GenericResponse;
 
 @Service
 public interface IAppUserService {
 
     //  SEARCH METHODS =====================
     List<AppUserDTO> searchAll() throws Exception;
-    AppUserDTO searchById(Long id) throws Exception;
-    AppUserDTO searchByUsername(String username) throws Exception;
-    List<AppUserDTO> searchByGrado(String grado) throws Exception;
+    GenericResponse<List<AppUserDTO>> searchPagination(Integer offset, Integer pageSize) throws Exception;
+    GenericResponse<List<AppUserDTO>> searchPaginationSorting(Integer offset, Integer pageSize, String fieldSort) throws Exception;
+    GenericResponse<AppUserDTO> searchById(Long id) throws Exception;
+    GenericResponse<AppUserDTO> searchByUsername(String username) throws Exception;
+    GenericResponse<List<AppUserDTO>> searchByFiltro(String filtro) throws Exception;
 
     //  SAVE METHODS =====================
-    AppUserDTO create(AppUserDTO newuser) throws Exception;
+    GenericResponse<AppUserDTO> create(AppUserDTO newuser) throws Exception;
 
     //  UPDATE METHODS =====================
-    AppUserDTO update(AppUserDTO newdata) throws Exception;
+    GenericResponse<AppUserDTO> update(AppUserDTO newdata) throws Exception;
 
     //  DELETE METHODS =====================
-    AppUserDTO deleteById(Long id) throws Exception;
-    void deleteAll() throws Exception;
+
+    // Delete multiple
+    GenericResponse<List<AppUserDTO>> deleteById(List<Long> id) throws Exception;
+    
+    // Utilidad?????
+    GenericResponse<String> deleteAll() throws Exception;
 }

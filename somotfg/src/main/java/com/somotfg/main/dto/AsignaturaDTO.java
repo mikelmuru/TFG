@@ -1,7 +1,5 @@
 package com.somotfg.main.dto;
 
-import com.somotfg.main.model.Grado;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,9 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserApuntesDTO {
+public class AsignaturaDTO {
+    
     private Long id;
-    private String titulo;
-    private Grado grado;
-    private String descripcion;
+    
+    private String cod;
+    private String nombre;
+    private String gradoCod;
+    private Integer curso;
 }
