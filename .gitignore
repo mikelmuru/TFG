@@ -2,3 +2,4 @@
 *.txt
 **/node_modules
 **/aws-keys.json
+**/jwt-keys.json
