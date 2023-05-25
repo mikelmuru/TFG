@@ -1,3 +1,4 @@
 #   NO SE COMMITEAN LOS ARCHIVOS DE TEXTO.
 *.txt
 **/node_modules
+**/aws-keys.json
