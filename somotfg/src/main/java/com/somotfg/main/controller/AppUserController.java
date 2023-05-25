@@ -90,7 +90,7 @@ public class AppUserController {
 
 
     //  ======================  METODOS POST  ======================
-    @PostMapping("/create")
+    @PostMapping("/admin/create")
     public ResponseEntity<GenericResponse<AppUserDTO>> createUser(@RequestBody AppUserDTO newUser) throws Exception {
         log.info("Entro al metodo createUser.");
 
@@ -122,7 +122,7 @@ public class AppUserController {
         return ResponseEntity.status(response.getCode()).body(response);
     }
 
-    @DeleteMapping("/deleteall")
+    @DeleteMapping("/admin/deleteall")
     public ResponseEntity<GenericResponse<String>> deleteAll() throws Exception {
         log.info("Entro al metodo deleteAll.");
         

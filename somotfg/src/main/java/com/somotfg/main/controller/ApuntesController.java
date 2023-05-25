@@ -24,7 +24,7 @@ import com.somotfg.main.service.ApunteService;
 import com.somotfg.main.util.response.GenericResponse;
 
 @RestController
-@RequestMapping("/somotfg/apuntes")
+@RequestMapping("/somotfg/apunte")
 @CrossOrigin(
     origins = "*",
     methods = {
@@ -138,7 +138,7 @@ public class ApuntesController {
         return ResponseEntity.status(response.getCode()).body(response);
     }
 
-    @DeleteMapping("/deleteall")
+    @DeleteMapping("/admin/deleteall")
     public ResponseEntity<GenericResponse<String>> deleteAll() throws Exception {
         log.info("Entro al metodo deleteAll.");
 

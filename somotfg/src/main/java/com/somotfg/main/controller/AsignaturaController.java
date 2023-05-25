@@ -79,7 +79,7 @@ public class AsignaturaController {
 
 
     // ====================== METODOS POST ======================
-    @PostMapping("/create")
+    @PostMapping("/admin/create")
     public ResponseEntity<GenericResponse<List<AsignaturaDTO>>> createAsignatura(
             @RequestBody List<AsignaturaDTO> newAsignatura) throws Exception {
         log.info("Entro al metodo createAsignatura.");
@@ -90,7 +90,7 @@ public class AsignaturaController {
         return ResponseEntity.status(response.getCode()).body(response);
     }
 
-    @PostMapping("/update")
+    @PostMapping("/admin/update")
     public ResponseEntity<GenericResponse<AsignaturaDTO>> updateAsignatura(@RequestBody AsignaturaDTO newDataAsignatura)
             throws Exception {
         log.info("Entro al metodo updateAsignatura.");
@@ -102,7 +102,7 @@ public class AsignaturaController {
     }
 
     // ====================== METODOS DELETE ======================
-    @DeleteMapping("/deletebyid")
+    @DeleteMapping("/admin/deletebyid")
     public ResponseEntity<GenericResponse<List<AsignaturaDTO>>> deleteById(@RequestBody List<Long> asignaturaIds)
             throws Exception {
         log.info("Entro al metodo deleteById.");
@@ -113,7 +113,7 @@ public class AsignaturaController {
         return ResponseEntity.status(response.getCode()).body(response);
     }
 
-    @DeleteMapping("/deleteall")
+    @DeleteMapping("/admin/deleteall")
     public ResponseEntity<GenericResponse<String>> deleteAll() throws Exception {
         log.info("Entro al metodo deleteAll.");
 

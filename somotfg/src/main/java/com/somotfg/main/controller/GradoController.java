@@ -89,7 +89,7 @@ public class GradoController {
     }
 
     // ====================== METODOS POST ======================
-    @PostMapping("/create")
+    @PostMapping("/admin/create")
     public ResponseEntity<GenericResponse<List<GradoDTO>>> createGrado(@RequestBody List<GradoDTO> newGrado) throws Exception {
         log.info("Entro al metodo createGrado.");
 
@@ -99,7 +99,7 @@ public class GradoController {
         return ResponseEntity.status(response.getCode()).body(response);
     }
 
-    @PostMapping("/update")
+    @PostMapping("/admin/update")
     public ResponseEntity<GenericResponse<GradoDTO>> updateGrado(@RequestBody GradoDTO newDataGrado) throws Exception {
         log.info("Entro al metodo updateGrado.");
 
@@ -110,7 +110,7 @@ public class GradoController {
     }
 
     // ====================== METODOS DELETE ======================
-    @DeleteMapping("/deletebyid")
+    @DeleteMapping("/admin/deletebyid")
     public ResponseEntity<GenericResponse<List<GradoDTO>>> deleteById(@RequestBody List<Long> userId) throws Exception {
         log.info("Entro al metodo deleteById.");
 
@@ -120,7 +120,7 @@ public class GradoController {
         return ResponseEntity.status(response.getCode()).body(response);
     }
 
-    @DeleteMapping("/deleteall")
+    @DeleteMapping("/admin/deleteall")
     public ResponseEntity<GenericResponse<String>> deleteAll() throws Exception {
         log.info("Entro al metodo deleteAll.");
 

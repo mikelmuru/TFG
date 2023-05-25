@@ -104,7 +104,7 @@ public class ExamenController {
     }
 
     // ====================== METODOS POST ======================
-    @PostMapping("/create")
+    @PostMapping("/profesor/create")
     public ResponseEntity<GenericResponse<ExamenDTO>> createExamen(
             @RequestPart(name = "newExamen") ExamenDTO newExamen,
             @RequestPart(name = "file") MultipartFile file) throws Exception {
@@ -116,7 +116,7 @@ public class ExamenController {
         return ResponseEntity.status(response.getCode()).body(response);
     }
 
-    @PostMapping("/update")
+    @PostMapping("/profesor/update")
     public ResponseEntity<GenericResponse<ExamenDTO>> updateExamen(@RequestBody ExamenDTO newDataExamen)
             throws Exception {
         log.info("Entro al metodo updateExamen.");
@@ -128,7 +128,7 @@ public class ExamenController {
     }
 
     // ====================== METODOS DELETE ======================
-    @DeleteMapping("/deletebyid")
+    @DeleteMapping("/profesor/deletebyid")
     public ResponseEntity<GenericResponse<List<ExamenDTO>>> deleteById(@RequestBody List<Long> examenIds)
             throws Exception {
         log.info("Entro al metodo deleteById.");
@@ -139,7 +139,7 @@ public class ExamenController {
         return ResponseEntity.status(response.getCode()).body(response);
     }
 
-    @DeleteMapping("/deleteall")
+    @DeleteMapping("/admin/deleteall")
     public ResponseEntity<GenericResponse<String>> deleteAll() throws Exception {
         log.info("Entro al metodo deleteAll.");
 
