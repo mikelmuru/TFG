@@ -149,6 +149,23 @@ public class AsignaturaService implements IAsignaturaService {
     }
 
     @Override
+    public GenericResponse<AsignaturaDTO> searchByCod(String asignaturacod) throws Exception {
+        GenericResponse<AsignaturaDTO> result = new GenericResponse<>();
+        Optional<Asignatura> asignatura = repository.findByCod(asignaturacod);
+
+        if (asignatura.isPresent()) {
+            result.setResult(model2dto(asignatura.get()));
+            result.setMessage("SUCCESS");
+            result.setCode(200);
+        } else {
+            result.setMessage("Not Found");
+            result.setCode(404);
+        }
+
+        return result;
+    }
+
+    @Override
     public GenericResponse<List<AsignaturaDTO>> searchByGrado(String gradocod) throws Exception {
         GenericResponse<List<AsignaturaDTO>> result = new GenericResponse<>();
         List<Asignatura> asignaturas = repository.findByGradoCod(gradocod);
@@ -259,8 +276,8 @@ public class AsignaturaService implements IAsignaturaService {
         for (Long id : ids) {
             Optional<Asignatura> asignatura = repository.findById(id);
             if (asignatura.isPresent()) {
-                GenericResponse<List<ExamenDTO>> examenesToDelete = examenService.searchByAsignatura(model2dto(asignatura.get()));
-                GenericResponse<List<ApunteDTO>> apuntesToDelete = apunteService.searchByAsignatura(model2dto(asignatura.get()));
+                GenericResponse<List<ExamenDTO>> examenesToDelete = examenService.searchByAsignatura(model2dto(asignatura.get()).getCod());
+                GenericResponse<List<ApunteDTO>> apuntesToDelete = apunteService.searchByAsignatura(model2dto(asignatura.get()).getCod());
                 List<Long> idsExAp = new ArrayList<>();
 
                 if (examenesToDelete.getCode() == 200) {

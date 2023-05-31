@@ -16,6 +16,7 @@ public interface IAsignaturaService {
     // List<AsignaturaDTO> searchAll() throws Exception;
     GenericResponse<List<AsignaturaDTO>> searchPagination(Integer offset, Integer pageSize) throws Exception;
     GenericResponse<List<AsignaturaDTO>> searchPaginationSorting(Integer offset, Integer pageSize, String fieldSort) throws Exception;
+    GenericResponse<AsignaturaDTO> searchByCod(String asignaturacod) throws Exception;
     GenericResponse<List<AsignaturaDTO>> searchByFiltro(String filtro) throws Exception;
     GenericResponse<List<AsignaturaDTO>> searchByGrado(String grado) throws Exception;
 

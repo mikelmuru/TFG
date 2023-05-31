@@ -3,7 +3,7 @@ import { Header } from "../../utils/Header";
 import { SearchBar } from "../../utils/SearchBar";
 import { ListaDinamica } from '../modulosIntermedio/ListaDinamica';
 import { ListaDinamicaContext } from '../../context/ListaDinamicaContext';
-import filterListaDinamicaData from '../../utils/filterData';
+import filterListaDinamicaData from '../../servicios/filterData';
 import * as ias from '../../mocks/ias.json'
 
 export function IAs() {

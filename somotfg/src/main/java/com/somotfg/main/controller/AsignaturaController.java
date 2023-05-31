@@ -56,6 +56,16 @@ public class AsignaturaController {
         return ResponseEntity.status(response.getCode()).body(response);
     }
 
+    @GetMapping("/getbycod")
+    public ResponseEntity<GenericResponse<AsignaturaDTO>> getById(@RequestParam("asignaturacod") String asignaturacod) throws Exception {
+        log.info("Entro al metodo getById.");
+
+        GenericResponse<AsignaturaDTO> response = new GenericResponse<>();
+        response = asignaturaService.searchByCod(asignaturacod);
+
+        return ResponseEntity.status(response.getCode()).body(response);
+    }
+
     @GetMapping("/getbygrado")
     public ResponseEntity<GenericResponse<List<AsignaturaDTO>>> getByGrado(@RequestParam("gradocod") String gradocod) throws Exception {
         log.info("Entro al metodo getByGrado");

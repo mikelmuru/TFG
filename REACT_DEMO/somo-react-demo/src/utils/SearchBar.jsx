@@ -48,7 +48,7 @@ export function SearchBar({ filterType, handleFilter, handleTipoBusqueda, actual
                                     searchBarSelectionOpt`
                                 }
                             >
-                                Usuarios
+                                Grados
                             </span>
                             <span
                                 onClick={() => useHandleTipoBusqueda('usuarios')}
@@ -59,7 +59,7 @@ export function SearchBar({ filterType, handleFilter, handleTipoBusqueda, actual
                                     searchBarSelectionOpt`
                                 }
                             >
-                                Grados
+                                Usuarios
                             </span>
                         </div>
                         : null

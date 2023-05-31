@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.somotfg.main.dto.ApunteDTO;
-import com.somotfg.main.dto.AsignaturaDTO;
+import com.somotfg.main.dto.ApunteNewDTO;
 import com.somotfg.main.service.ApunteService;
 import com.somotfg.main.util.response.GenericResponse;
 
@@ -82,11 +83,11 @@ public class ApuntesController {
     }
 
     @GetMapping("/getbyasignatura")
-    public GenericResponse<List<ApunteDTO>> getByAsignatura(@RequestBody AsignaturaDTO asignatura) throws Exception {
+    public GenericResponse<List<ApunteDTO>> getByAsignatura(@RequestParam("asignaturacod") String asignaturacod) throws Exception {
         log.info("Entro al metodo getByGrado.");
         
         GenericResponse<List<ApunteDTO>> response = new GenericResponse<>();
-        response = apunteService.searchByAsignatura(asignatura);
+        response = apunteService.searchByAsignatura(asignaturacod);
 
         return response;
     }
@@ -106,12 +107,21 @@ public class ApuntesController {
     //  ======================  METODOS POST  ======================
     @PostMapping("/create")
     public ResponseEntity<GenericResponse<ApunteDTO>> createApuntes(
-            @RequestPart(name = "newApuntes") ApunteDTO newApuntes,
-            @RequestPart(name = "file") MultipartFile file) throws Exception {
+            @RequestPart(name = "newApuntes") String newApuntes,
+            @RequestParam(name = "file") MultipartFile file
+    ) throws Exception {
         log.info("Entro al metodo createApuntes.");
+
+        ObjectMapper mapper = new ObjectMapper();
+        ApunteNewDTO dto = new ApunteNewDTO();
+        try {
+            dto = mapper.readValue(newApuntes, ApunteNewDTO.class);
+        } catch(Exception e) {
+            log.error(e.getMessage());
+        }
         
         GenericResponse<ApunteDTO> response = new GenericResponse<>();
-        response = apunteService.create(newApuntes, file);
+        response = apunteService.create(dto, file);
 
         return ResponseEntity.status(response.getCode()).body(response);
     }

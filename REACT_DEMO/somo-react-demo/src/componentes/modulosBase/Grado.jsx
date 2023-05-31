@@ -1,19 +1,22 @@
-import { useState } from 'react';
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import * as AiIcons from 'react-icons/ai'
 import { Header } from '../../utils/Header';
 import '../../css/grado.css'
+import { readLocalStorageNoRender } from '../../custom-hooks/useLocalStorage';
+import * as asignaturaService from '../../servicios/asignaturaService';
+
 
 export function Grado() {
     console.log('Grado')
 
-    let { grado } = useParams()
+    const { grado } = useParams()
 
     const [openCurso1, setOpenCurso1] = useState(false)
     const [openCurso2, setOpenCurso2] = useState(false)
+    const [asignaturas, setAsignaturas] = useState([])
 
-    const location = useLocation()
-    const objectoGrado = location.state.data ? location.state.data : grado
+    const jwtToken = readLocalStorageNoRender('user')
 
     const handleCurso1 = () => {
         setOpenCurso1(!openCurso1)
@@ -22,9 +25,25 @@ export function Grado() {
         setOpenCurso2(!openCurso2)
     }
 
+    const getAsignaturaByGrado = async () => {
+        try {
+            const response = await asignaturaService.getAsignaturasByGrado(jwtToken.access_token, grado)
+
+            if (response.data.code === 200) {
+                setAsignaturas(response.data?.result)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getAsignaturaByGrado()
+    }, [openCurso1, openCurso2])
+
     return (
         <>
-            <Header title={`${objectoGrado.nombre}`} />
+            <Header title={grado} />
             <div className='gradoContainer'>
 
                 <button onClick={() => { handleCurso1() }} className='gradoOpenCursoBtn'>
@@ -36,17 +55,28 @@ export function Grado() {
                     }
                 </button>
                 {
-                    openCurso1 && <div className='gradoAsignaturasContainer'>
-                        {
-                            objectoGrado.curso1.map((asignatura, indice) => {
-                                return (
-                                    <Link to={location.pathname + '/' + asignatura.cod} className='gradoAsignaturasOpt' key={asignatura.cod}>
-                                        {asignatura.nombre}
-                                    </Link>
-                                )
-                            })
-                        }
-                    </div>
+                    openCurso1
+                        ?
+                        asignaturas.length > 0
+                            ?
+                            <div className='gradoAsignaturasContainer'>
+                                {
+                                    asignaturas.map((asignatura) => {
+                                        return (
+                                            asignatura.curso === 1
+                                            &&
+                                            <Link to={location.pathname + '/' + asignatura.cod} className='gradoAsignaturasOpt' key={asignatura.cod}>
+                                                {asignatura.nombre}
+                                            </Link>
+                                        )
+                                    })
+                                }
+                            </div>
+                            :
+                            <div className="gradoAsignaturasContainer">
+                                <span>No hay asignaturas relacionadas.</span>
+                            </div>
+                        : null
                 }
 
                 <button onClick={() => { handleCurso2() }} className='gradoOpenCursoBtn'>
@@ -58,17 +88,28 @@ export function Grado() {
                     }
                 </button>
                 {
-                    openCurso2 && <div className='gradoAsignaturasContainer'>
-                        {
-                            objectoGrado.curso2.map((asignatura, indice) => {
-                                return (
-                                    <Link to={location.pathname + '/' + asignatura.cod} className='gradoAsignaturasOpt' key={asignatura.cod}>
-                                        {asignatura.nombre}
-                                    </Link>
-                                )
-                            })
-                        }
-                    </div>
+                    openCurso2
+                        ?
+                        asignaturas.length > 0
+                            ?
+                            <div className='gradoAsignaturasContainer'>
+                                {
+                                    asignaturas.map((asignatura) => {
+                                        return (
+                                            asignatura.curso === 2
+                                            &&
+                                            <Link to={location.pathname + '/' + asignatura.cod} className='gradoAsignaturasOpt' key={asignatura.cod}>
+                                                {asignatura.nombre}
+                                            </Link>
+                                        )
+                                    })
+                                }
+                            </div>
+                            :
+                            <div className="gradoAsignaturasContainer">
+                                <span>No hay asignaturas relacionadas.</span>
+                            </div>
+                        : null
                 }
             </div>
         </>

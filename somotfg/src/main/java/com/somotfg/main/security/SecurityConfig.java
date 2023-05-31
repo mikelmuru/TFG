@@ -15,8 +15,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
-import com.somotfg.main.dto.AppUserDTO;
-import com.somotfg.main.service.AppUserService;
+// import com.somotfg.main.dto.AppUserSingUpDTO;
+// import com.somotfg.main.service.AppUserService;
 import com.somotfg.main.service.SecurityService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,8 +30,8 @@ public class SecurityConfig {
     @Autowired
     private SecurityService securityService;
 
-    @Autowired
-    private AppUserService userService;
+    // @Autowired
+    // private AppUserService userService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -88,17 +88,20 @@ public class SecurityConfig {
         return authenticationManagerBuilder.build();
     }
 
-    @Bean
-    void createAdminUser() throws Exception {
-        log.info("Entro a createDefUsers");
-        AppUserDTO admin = new AppUserDTO();
-        admin.setUsername("admin");
-        admin.setNombre("admin");
-        admin.setApellido("admin");
-        admin.setPassword("1234admin");
-        admin.setRole("admin");
-        userService.create(admin);
-    }
+
+    // LO DEJAMOS COMENTADO POR QUE YA EXISTE EL USUARIO DEL ADMIN
+    // @Bean
+    // void createAdminUser() throws Exception {
+    //     log.info("Entro a createDefUsers");
+    //     AppUserSingUpDTO admin = new AppUserSingUpDTO();
+    //     admin.setUsername("admin");
+    //     admin.setNombre("admin");
+    //     admin.setApellido("admin");
+    //     admin.setMail("admin@mail.com");
+    //     admin.setPassword("1234admin");
+    //     admin.setRole("admin");
+    //     userService.create(admin);
+    // }
 
     
 

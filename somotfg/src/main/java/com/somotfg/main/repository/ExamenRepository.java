@@ -1,6 +1,7 @@
 package com.somotfg.main.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,6 +21,8 @@ public interface ExamenRepository extends JpaRepository<Examen, Long> {
     List<Examen> findByAsignaturaCod(String cod);
 
     List<Examen> findByAutor(AppUser autor);
+
+    Optional<Examen> findByCod(String cod);
 
     // POSIBILIDAD DE BUSCAR POR ASIGNATURA Y COD SIN IMPORTAR MAYUS Y MINUS
     @Query("select p from Examen p "

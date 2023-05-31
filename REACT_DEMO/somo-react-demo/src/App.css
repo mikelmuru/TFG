@@ -8,15 +8,19 @@
   text-align: center;
 }
 
+.login {
+  width: 100%;
+}
 
 /* ESTILOS PARA EL 'HEADER' */
 .appHeader {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   margin-top: 1vh;
   margin-bottom: 1vh;
-  width: 90%;
+  width: 85vw;
 }
 
 .webTitleText {
@@ -33,9 +37,20 @@
   text-align: left;
 }
 
-
-.hr {
-  margin-top: 0px;
+.logOutSection {
+  display: flex;
+  align-items: center;
+}
+.logoutall {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.logOutBtn {
+  background-color: transparent;
+  border: none;
+  margin-right: .5rem;
+  cursor: pointer;
 }
 
 /* 
@@ -45,6 +60,7 @@
 .fullApp {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
   width: 100%;
 }

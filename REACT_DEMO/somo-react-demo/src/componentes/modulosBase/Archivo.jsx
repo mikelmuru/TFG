@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsFileEarmarkText } from 'react-icons/bs'
 import { AiOutlineCloseCircle, AiOutlineCloudDownload } from 'react-icons/ai'
 import '../../css/archivo.css'
+import * as s3Service from '../../servicios/s3Service'
 import { readLocalStorageNoRender } from '../../custom-hooks/useLocalStorage';
 
 export function Archivo({ archivo, handleClose }) {
     console.log('Cargado Archivo')
 
-    const modulo = readLocalStorageNoRender('modulo')
+    const [descargable, setDescargable] = useState(null)
+
+    const date = new Date(archivo.fecha)
+    const jwtToken = readLocalStorageNoRender('user')
+
+    const getS3File = async () => {
+        const response = await s3Service.getFile(jwtToken.access_token, archivo.cod)
+
+        if (response.data) {
+            const blob = new Blob([response.data?.bytes])
+            const url = URL.createObjectURL(blob)
+
+            setDescargable({ 'blob': blob, 'url': url })
+        }
+
+    }
+
+    useEffect(() => {
+        getS3File()
+    }, [])
 
     return (
         <>
@@ -21,31 +41,31 @@ export function Archivo({ archivo, handleClose }) {
                     </article>
                 </section>
                 <p className='archivoTitle'>
-                    {/* {archivo.cod} */}archivo.cod
+                    {archivo.cod}
                 </p>
 
                 <section className='archivoInfo'>
                     <span className='archivoInfoDato'>
-                        {/* {archivo.autor} */}archivo.autor
+                        {archivo.autor}
                     </span>
                     <span className='archivoInfoDato'>
-                        {/* {archivo.anio} */}archivo.año
+                        {`${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`}
                     </span>
                     <span className='archivoInfoDato'>
-                        {archivo.asignatura}
+                        {archivo.asignaturaNombre}
                     </span>
-                    {
-                        modulo == 'examenes'
-                            ?
-                            <span className='archivoInfoDato'>
-                                {/* {archivo.trimestre} */} archivo.trimestre
-                            </span>
-                            : null
-                    }
                 </section>
 
                 <article className='archivoDownloadContainer'>
-                    <AiOutlineCloudDownload size={60} className='archivoDownloadIcon' />
+                    <a
+                        href={descargable?.url}
+                        download={archivo.cod}
+                        target='_blank'
+                        type='application/pdf'
+                        className='descargableLink'
+                    >
+                        <AiOutlineCloudDownload size={60} className='archivoDownloadIcon' />
+                    </a>
                 </article>
             </div>
         </>

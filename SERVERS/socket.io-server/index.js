@@ -17,6 +17,8 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
 
+    console.log('Socket connected: ' + socket.id)
+
     // ========================================================================================
     // ESCUCHAMOS EN nuevoChat PARA CAMBIAR AL USUARIO DE SALA DE CHAT. CERRAMOS LAS CONEXIONES
     // ABIERTAS Y CREAMOS LA CONEXION CON LA SALA QUE DESEA CHATEAR
@@ -43,11 +45,12 @@ io.on('connection', (socket) => {
     // SOCKET.ON RECIBIENDO MENSAJES EN SUPER Y ENVIANDO EN CHAT X
     socket.on('super', (info) => {
 
-        var emiton = info.message.chatname + '_response'
-        console.log(emiton)
+        console.log(info)
+        var emiton = info.chatname + '_response'
 
-        var tosend = { who: info.message.message.who, text: info.message.message.text, from: 'remote' }
-        socket.to(info.message.chatname).emit(emiton, tosend)
+        var tosend = { who: info.message.who, message: info.message.message, from: 'remote' }
+        console.log(tosend)
+        socket.broadcast.emit(emiton, tosend)
     });
 
 

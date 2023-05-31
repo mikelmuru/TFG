@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.somotfg.main.dto.AppUserDTO;
+import com.somotfg.main.dto.AppUserSingUpDTO;
 import com.somotfg.main.service.AppUserService;
 import com.somotfg.main.util.response.GenericResponse;
 
@@ -41,8 +42,8 @@ public class AppUserController {
     @GetMapping("/getall")
     public ResponseEntity<GenericResponse<List<AppUserDTO>>> getAll(
                 @RequestParam(required = false, defaultValue = "0") Integer pageN,
-                @RequestParam(required = false, defaultValue = "10") Integer counts,
-                @RequestParam(required = false) String fieldSort) throws Exception {
+                @RequestParam(required = false, defaultValue = "50") Integer counts,
+                @RequestParam(required = false, defaultValue = "username") String fieldSort) throws Exception {
         log.info("Entro al metodo getAll.");
         
         GenericResponse<List<AppUserDTO>> response = new GenericResponse<>();
@@ -91,7 +92,7 @@ public class AppUserController {
 
     //  ======================  METODOS POST  ======================
     @PostMapping("/admin/create")
-    public ResponseEntity<GenericResponse<AppUserDTO>> createUser(@RequestBody AppUserDTO newUser) throws Exception {
+    public ResponseEntity<GenericResponse<AppUserDTO>> createUser(@RequestBody AppUserSingUpDTO newUser) throws Exception {
         log.info("Entro al metodo createUser.");
 
         GenericResponse<AppUserDTO> response = new GenericResponse<>();

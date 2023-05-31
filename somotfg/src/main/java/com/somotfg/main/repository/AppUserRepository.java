@@ -17,9 +17,9 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     // lower(p.nombre) like lower(concat(:filtro,'%')) -> initcap(p.nombre) like concat(:filtro,'%')
     // lower(p.apellido) like lower(concat(:filtro,'%')) -> initcap(p.apellido) like concat(:filtro,'%')
     @Query("select p from AppUser p "
-            + "where lower(p.username) like lower(concat('%',:filtro,'%')) "
-            + "or lower(p.nombre) like lower(concat(:filtro,'%')) "
-            + "or lower(p.apellido) like lower(concat(:filtro,'%'))")
+            + "where lower(p.username) like lower(concat(:filtro,'%')) "
+            + "or initcap(p.nombre) like concat(:filtro,'%') "
+            + "or initcap(p.apellido) like concat(:filtro,'%')")
     List<AppUser> findByFiltro(@Param("filtro") String filtro);
 
 }

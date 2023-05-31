@@ -55,7 +55,9 @@
     width: 80%;
 }
 
-
+.descargableLink {
+    text-decoration: none;
+}
 
 .archivoDownloadContainer {
     display: flex;

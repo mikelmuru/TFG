@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -22,9 +24,13 @@ public class SecurityService implements UserDetailsService{
     @Autowired
     private AppUserRepository userRepository;
 
+    private Logger log = LoggerFactory.getLogger(SecurityService.class);
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<AppUser> optUser = userRepository.findByUsername(username);
+
+        log.info(optUser.get().toString());
 
         if (optUser.isPresent()) {
             AppUser user = optUser.get();

@@ -38,16 +38,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         log.info("Cargo 'doFilterInternal' Bean en JwtAuthenticationFilter.");
 
-        // Se comprueba que exista el header authorization y que tenga una forma valida
+        log.info("Se comprueba que exista el header authorization y que tenga una forma valida");
         final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (!StringUtils.hasLength(header) || !header.startsWith("Bearer ")) {
+            log.info("HEADER NO APARECE");
             filterChain.doFilter(request, response);
             return;
         }
 
-        // Se extrae el token del header authorization y se valida utilizando el servicio de JwtTokenUtil
+        log.info("Se extrae el token del header authorization y se valida utilizando el servicio de JwtTokenUtil");
         final String token = header.split(" ")[1].trim();
         if (!jwtTokenUtil.validate(token)) {
+            log.info("TOKEN NO VALIDO");
             filterChain.doFilter(request, response);
             return;
         }

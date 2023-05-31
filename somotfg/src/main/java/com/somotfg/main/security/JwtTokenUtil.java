@@ -24,7 +24,7 @@ public class JwtTokenUtil {
     @Value("${jwt.issuer}")
     private String jwtIssuer;
 
-    private static final Integer ACCES_TOKEN_LIFE = 2;
+    private static final Integer ACCES_TOKEN_LIFE = 20;
 
     public String generateAccessToken(AppUser user) {
 

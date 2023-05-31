@@ -20,14 +20,14 @@ import com.somotfg.main.dto.GradoDTO;
 import com.somotfg.main.service.GradoService;
 import com.somotfg.main.util.response.GenericResponse;
 
+@CrossOrigin(origins = "*", methods = {
+    RequestMethod.GET,
+    RequestMethod.POST,
+    RequestMethod.DELETE,
+    RequestMethod.PUT
+})
 @RestController
 @RequestMapping("/somotfg/grado")
-@CrossOrigin(origins = "*", methods = {
-        RequestMethod.GET,
-        RequestMethod.POST,
-        RequestMethod.DELETE,
-        RequestMethod.PUT
-})
 public class GradoController {
 
     @Autowired
@@ -38,9 +38,9 @@ public class GradoController {
     // ====================== METODOS GET ======================
     @GetMapping("/getall")
     public ResponseEntity<GenericResponse<List<GradoDTO>>> getAll(
-            @RequestParam(required = false, defaultValue = "0") Integer pageN,
-            @RequestParam(required = false, defaultValue = "10") Integer counts,
-            @RequestParam(required = false) String fieldSort) throws Exception {
+            @RequestParam(required = false, defaultValue = "0", name = "pageN") Integer pageN,
+            @RequestParam(required = false, defaultValue = "50", name = "counts") Integer counts,
+            @RequestParam(required = false, defaultValue = "cod", name = "fieldSort") String fieldSort) throws Exception {
         log.info("Entro al metodo getAll.");
 
         GenericResponse<List<GradoDTO>> response = new GenericResponse<>();
@@ -57,11 +57,11 @@ public class GradoController {
     }
 
     @GetMapping("/getbyid")
-    public ResponseEntity<GenericResponse<GradoDTO>> getById(@RequestParam("userId") Long userId) throws Exception {
+    public ResponseEntity<GenericResponse<GradoDTO>> getById(@RequestParam("gradoid") Long gradoid) throws Exception {
         log.info("Entro al metodo getById.");
 
         GenericResponse<GradoDTO> response = new GenericResponse<>();
-        response = gradoService.searchById(userId);
+        response = gradoService.searchById(gradoid);
 
         return ResponseEntity.status(response.getCode()).body(response);
     }
@@ -111,11 +111,11 @@ public class GradoController {
 
     // ====================== METODOS DELETE ======================
     @DeleteMapping("/admin/deletebyid")
-    public ResponseEntity<GenericResponse<List<GradoDTO>>> deleteById(@RequestBody List<Long> userId) throws Exception {
+    public ResponseEntity<GenericResponse<List<GradoDTO>>> deleteById(@RequestBody List<Long> gradosids) throws Exception {
         log.info("Entro al metodo deleteById.");
 
         GenericResponse<List<GradoDTO>> response = new GenericResponse<>();
-        response = gradoService.deleteById(userId);
+        response = gradoService.deleteById(gradosids);
 
         return ResponseEntity.status(response.getCode()).body(response);
     }

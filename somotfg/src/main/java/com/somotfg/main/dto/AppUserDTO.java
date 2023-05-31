@@ -1,6 +1,5 @@
 package com.somotfg.main.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +15,4 @@ public class AppUserDTO {
     private String apellido;
     private String mail;
     private String role;
-    private String password;
-    
-    private Boolean eliminado;
 }

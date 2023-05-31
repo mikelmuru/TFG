@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.somotfg.main.dto.AsignaturaDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.somotfg.main.dto.ExamenDTO;
+import com.somotfg.main.dto.ExamenNewDTO;
 import com.somotfg.main.service.ExamenService;
 import com.somotfg.main.util.response.GenericResponse;
 
@@ -82,12 +83,12 @@ public class ExamenController {
     }
 
     @GetMapping("/getbyasignatura")
-    public ResponseEntity<GenericResponse<List<ExamenDTO>>> getByAsignatura(@RequestBody AsignaturaDTO asignatura)
+    public ResponseEntity<GenericResponse<List<ExamenDTO>>> getByAsignatura(@RequestParam("asignaturacod") String asignaturacod)
             throws Exception {
         log.info("Entro al metodo getByAsignatura.");
 
         GenericResponse<List<ExamenDTO>> response = new GenericResponse<>();
-        response = examenService.searchByAsignatura(asignatura);
+        response = examenService.searchByAsignatura(asignaturacod);
 
         return ResponseEntity.status(response.getCode()).body(response);
     }
@@ -106,12 +107,21 @@ public class ExamenController {
     // ====================== METODOS POST ======================
     @PostMapping("/profesor/create")
     public ResponseEntity<GenericResponse<ExamenDTO>> createExamen(
-            @RequestPart(name = "newExamen") ExamenDTO newExamen,
+            @RequestPart(name = "newExamen") String newExamen,
             @RequestPart(name = "file") MultipartFile file) throws Exception {
         log.info("Entro al metodo createExamen.");
 
+        ObjectMapper mapper = new ObjectMapper();
+        ExamenNewDTO dto = new ExamenNewDTO();
+        try {
+            dto = mapper.readValue(newExamen, ExamenNewDTO.class);
+            log.info(dto.toString());
+        } catch(Exception e) {
+            log.error(e.getMessage());
+        }
+
         GenericResponse<ExamenDTO> response = new GenericResponse<>();
-        response = examenService.create(newExamen, file);
+        response = examenService.create(dto, file);
 
         return ResponseEntity.status(response.getCode()).body(response);
     }

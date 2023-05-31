@@ -1,6 +1,5 @@
 package com.somotfg.main.service;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.somotfg.main.dto.AppUserDTO;
+import com.somotfg.main.dto.AppUserSingUpDTO;
 import com.somotfg.main.model.AppUser;
 import com.somotfg.main.repository.AppUserRepository;
 import com.somotfg.main.service.interfaze.IAppUserService;
@@ -42,8 +42,6 @@ public class AppUserService implements IAppUserService {
     private AppUserDTO model2dto(AppUser model) {
         AppUserDTO dto = new AppUserDTO();
         dto = modelMapper.map(model, AppUserDTO.class);
-        dto.setPassword(null);
-        dto.setEliminado(model.getEliminado());
         return dto;
     }
 
@@ -53,26 +51,11 @@ public class AppUserService implements IAppUserService {
         // mapear a mano la contraseña con encriptador -> en el dto solo viene la password en el registro/login
         return model;
     }
-
-    private AppUserDTO update (AppUserDTO original, AppUserDTO nuevo) {
-        Class<AppUserDTO> clase = AppUserDTO.class;
-        Field[] campos = clase.getDeclaredFields();
-
-        for (Field campo : campos) {
-            campo.setAccessible(true);
-            try {
-                Object valorOriginal = campo.get(original);
-                Object valorNuevo = campo.get(nuevo);
-
-                if (valorNuevo != null && !valorNuevo.equals(valorOriginal)) {
-                    campo.set(original, valorNuevo);
-                }
-            } catch (Exception e) {
-                log.error(e.getMessage(), e);
-            }
-        }
-
-        return original;
+    private AppUser singupdto2model(AppUserSingUpDTO dto) {
+        AppUser model = new AppUser();
+        model = modelMapper.map(dto, AppUser.class);
+        // mapear a mano la contraseña con encriptador -> en el dto solo viene la password en el registro/login
+        return model;
     }
 
     // DEVOLVEMOS UNA CLASE GENERICRESPONSE CON CODIGO-MENSAJE-RESULTADO(BODY)
@@ -201,10 +184,11 @@ public class AppUserService implements IAppUserService {
 
     // ===================****CREATE METHODS****===================
     @Override
-    public GenericResponse<AppUserDTO> create(AppUserDTO newuser) throws Exception {
-        AppUser user = dto2model(newuser);
+    public GenericResponse<AppUserDTO> create(AppUserSingUpDTO newuser) throws Exception {
+        AppUser user = singupdto2model(newuser);
         String encodedPassowrd = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassowrd);
+        user.setEliminado(false);
         return save(user);
     }
 
@@ -213,10 +197,13 @@ public class AppUserService implements IAppUserService {
     public GenericResponse<AppUserDTO> update(AppUserDTO newdata) throws Exception {
         Optional<AppUser> user = repository.findById(newdata.getId());
         GenericResponse<AppUserDTO> result = new GenericResponse<>();
+
         if (user.isPresent()) {
-            AppUserDTO original = model2dto(user.get());
-            AppUserDTO fullNewData = update(original,newdata);
-            AppUser entity = dto2model(fullNewData);
+            // AppUserLoginDTO original = model2updatedto(user.get());
+            // AppUserDTO fullNewData = update(original,newdata);
+            AppUser entity = dto2model(newdata);
+            entity.setPassword(user.get().getPassword());
+            entity.setEliminado(user.get().getEliminado());
             result = save(entity);
         }
         return result;

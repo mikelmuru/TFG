@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.somotfg.main.dto.ApunteDTO;
-import com.somotfg.main.dto.AsignaturaDTO;
+import com.somotfg.main.dto.ApunteNewDTO;
 import com.somotfg.main.model.AppUser;
 import com.somotfg.main.model.Apunte;
 import com.somotfg.main.model.Asignatura;
@@ -72,6 +72,22 @@ public class ApunteService implements IApunteService {
         if (autor.isPresent() && asignatura.isPresent()) {
             model.setAutor(autor.get());
             model.setAsignatura(asignatura.get());
+        }
+
+        return model;
+    }
+
+    private Apunte newdto2model(ApunteNewDTO dto) {
+        Apunte model = new Apunte();
+        model = modelMapper.map(dto, Apunte.class);
+
+        Date actual = new Date();
+        Optional<AppUser> autor = userRepository.findByUsername(dto.getAutor());
+        Optional<Asignatura> asignatura = asignaturaRepository.findByCod(dto.getAsignaturaCod());
+        if (autor.isPresent() && asignatura.isPresent()) {
+            model.setAutor(autor.get());
+            model.setAsignatura(asignatura.get());
+            model.setFecha(actual);
         }
 
         return model;
@@ -202,13 +218,13 @@ public class ApunteService implements IApunteService {
     }
 
     @Override
-    public GenericResponse<List<ApunteDTO>> searchByAsignatura(AsignaturaDTO asignatura) throws Exception {
+    public GenericResponse<List<ApunteDTO>> searchByAsignatura(String asignaturacod) throws Exception {
         GenericResponse<List<ApunteDTO>> result = new GenericResponse<>();
-        Asignatura asignaturamodel = modelMapper.map(asignatura, Asignatura.class);
+        // Asignatura asignaturamodel = modelMapper.map(asignatura, Asignatura.class);
         List<ApunteDTO> dtos = new ArrayList<>();
 
         // List<Apunte> apuntes = repository.findByAsignatura(asignaturamodel);
-        List<Apunte> apuntes = repository.findByAsignaturaCod(asignaturamodel.getCod());
+        List<Apunte> apuntes = repository.findByAsignaturaCod(asignaturacod);
         for (Apunte apunte : apuntes) {
             // ApunteDTO dto = modelMapper.map(apunte, ApunteDTO.class);
             ApunteDTO dto = model2dto(apunte);
@@ -253,16 +269,13 @@ public class ApunteService implements IApunteService {
 
     // cuando se implemente la conexion con s3 actualizar para procesar el multipart y enviarlo a s3 y recibir la referencia
     @Override
-    public GenericResponse<ApunteDTO> create(ApunteDTO apunteData, MultipartFile file) throws Exception {
+    public GenericResponse<ApunteDTO> create(ApunteNewDTO apunteData, MultipartFile file) throws Exception {
         GenericResponse<ApunteDTO> result = new GenericResponse<>();
         GenericResponse<ApunteDTO> saved = new GenericResponse<>();
         String refS3 = "";
 
-        Date actual = new Date();
-        apunteData.setFecha(actual);
-
         try {
-            saved = save(dto2model(apunteData));
+            saved = save(newdto2model(apunteData));
             if (saved.getCode() == 201) {
                 refS3 = s3Service.uploadFile(file, apunteData.getCod());
                 if (refS3 != "") {

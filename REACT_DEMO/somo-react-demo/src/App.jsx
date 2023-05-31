@@ -1,8 +1,9 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { MenuOption } from './componentes/MenuOption'
+import { Routes } from 'react-router-dom'
 import './App.css'
-import { MisRutas } from './componentes/MisRutas'
-import { cleanLocalStorage } from './custom-hooks/useLocalStorage'
+import { useLocalStorage, cleanLocalStorage } from './custom-hooks/useLocalStorage'
+import { Contacto, Navegacion } from './componentes/Menus'
+import { allRoutes } from './utils/Constantes'
+import { HiLogout } from 'react-icons/hi'
 
 function App() {
 
@@ -10,69 +11,52 @@ function App() {
   // cleanLocalStorage('modulo')
   // cleanLocalStorage('moduloFilteredBy')
 
+  const [user, setUser] = useLocalStorage('user', null)
+
+  console.log("App")
+
+  const fullappRutas = () => allRoutes(user, setUser)
+
+  const logOut = () => {
+    setUser(null)
+    cleanLocalStorage()
+  }
+
   return (
-    <BrowserRouter>
+    <>
       <header className='appHeader'>
         <h1 className='webTitle'>
           <span className="webTitleText">SOMO.pdf</span>
         </h1>
+        {
+          user
+          &&
+          <section className="logOutSection">
+            <article className='logoutall' onClick={() => logOut()}>
+              <button className='logOutBtn'>
+                LogOut
+              </button>
+              <HiLogout size={20} />
+            </article>
+          </section>
+        }
       </header>
-      {/* <hr style={{ width: '80%' }} className='hr' /> */}
 
       <div className='fullApp'>
-        <div className='appElement appMenu' style={{ borderRight: '.5px solid var(--borderColor)' }}>
-          <MenuOption
-            iconName='AiFillHome' pathTo='Home'
-            linkPath='/' menuSide='appMenuIzq'
-          />
-          <MenuOption
-            iconName='AiOutlineFilePdf' pathTo='Examenes'
-            linkPath='/examenes' menuSide='appMenuIzq'
-          />
-          <MenuOption
-            iconName='TbNotes' pathTo='Apuntes'
-            linkPath='/apuntes' menuSide='appMenuIzq'
-          />
-          <MenuOption
-            iconName='AiOutlineWechat' pathTo='Foro'
-            linkPath='/foro' menuSide='appMenuIzq'
-          />
-          <MenuOption
-            iconName='BsRobot' pathTo='IAs'
-            linkPath='/ias' menuSide='appMenuIzq'
-          />
-          <MenuOption
-            iconName='BsPersonCircle' pathTo='Mi Cuenta'
-            linkPath='/myaccount' menuSide='appMenuIzq'
-          />
-          <MenuOption
-            iconName='AiFillHome' pathTo='Tema'
-            linkPath='/' menuSide='appMenuIzq' config
-          />
+        {
+          user ? <Navegacion /> : null
+        }
+        <div className="appElement appContent">
+          <Routes>
+            {fullappRutas()}
+          </Routes>
         </div>
-
-
-        <div className='appElement appContent'>
-          <MisRutas />
-        </div>
-
-
-        <div className='appElement appMenu' style={{ borderLeft: '.5px solid var(--borderColor)' }}>
-          <MenuOption
-            iconName='AiFillPhone' pathTo='Tlf: +34 66 66 666'
-            linkPath='/' menuSide='appMenuDer'
-          />
-          <MenuOption
-            iconName='AiFillMail' pathTo='somo@gmail.com'
-            linkPath='/' menuSide='appMenuDer'
-          />
-          <MenuOption
-            iconName='TbMapPin' pathTo='Ubicacion'
-            linkPath='/' menuSide='appMenuDer'
-          />
-        </div>
+        {
+          user ? <Contacto /> : null
+        }
       </div>
-    </BrowserRouter>
+
+    </>
   )
 }
 

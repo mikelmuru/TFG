@@ -1,13 +1,13 @@
-import { useLocation, useParams } from "react-router"
+import { useParams } from "react-router"
 import { Header } from "../../utils/Header"
-import * as grados from '../../mocks/grados.json'
-import * as apuntes from '../../mocks/apuntes.json'
-import * as examenes from '../../mocks/examenes.json'
-import { useLocalStorage } from "../../custom-hooks/useLocalStorage"
+import { readLocalStorageNoRender, useLocalStorage } from "../../custom-hooks/useLocalStorage"
 import { useEffect, useState } from "react"
 import { AiOutlineFilePdf, AiOutlineFileText } from 'react-icons/ai'
 import '../../css/asignatura.css'
 import { Archivo } from "./Archivo"
+import * as examenService from "../../servicios/examenService"
+import * as apunteService from "../../servicios/apunteService"
+import * as asignaturaService from "../../servicios/asignaturaService"
 
 export function Asignatura() {
     console.log('Cargo Asignatura')
@@ -15,122 +15,89 @@ export function Asignatura() {
     // ESTADOS RELATIVOS A LA INFORMACION DE LA PROPIA ASIGNATURA Y LISTA DE DATOS A MOSTRAR
     const [listaArchivos, setListaArchivos] = useState([])
     const [asignatura, setAsignatura] = useState({})
-
     // ESTADO PARA CONTROLAR LA VISUALIZACION O NO DE UN ELEMENTO DE LA LISTA DE APUNTES-EXAMENES
     const [archivo, setArchivo] = useState(null)
 
-    // const location = useLocation()
+    const jwtToken = readLocalStorageNoRender('user')
 
     const { asignatura: asignaturaCod } = useParams()
     const [modulo, setModulo] = useLocalStorage('modulo', '')
-
-    const handleListaArchivos = (data) => {
-        setListaArchivos(data)
-    }
-
-    const handleAsignatura = (asignatura) => {
-        setAsignatura(asignatura)
-    }
 
     const handleArchivo = (data) => {
         setArchivo(data)
     }
 
+    const getAsignaturaByCod = async () => {
+        const response = await asignaturaService.getAsignaturaByCod(jwtToken.access_token, asignaturaCod)
 
-    // ESTO SE REEMPLAZARA POR LLAMADAS A LOS SERVICIOS BACKEND -- REQUEST ASIGNATURA BY COD / REQUEST EXAMENES / MODULOS BY ASIGNATURA
-    useEffect(() => {
-        var asignaturaObj = {}
-        var data = []
-        grados.grados.map((gradoMap) => {
-            gradoMap.curso1.map((asignatura) => { asignatura.cod == asignaturaCod ? asignaturaObj = asignatura : null })
-            gradoMap.curso2.map((asignatura) => { asignatura.cod == asignaturaCod ? asignaturaObj = asignatura : null })
-        })
+        response.data?.code === 200
+        ?   setAsignatura(response.data?.result)
+        :   console.log(response)
+    }
+
+    const getFilesByAsignatura = async (modulo) => {
+
+        let response = []
+
         if (modulo == 'examenes') {
-            examenes.examenes.map((examen) => {
-                examen.asignatura == asignaturaObj.nombre ? data.push(examen) : null
-            })
+            response = await examenService.getExamenesByAsignatura(jwtToken.access_token, asignaturaCod)
         }
         if (modulo == 'apuntes') {
-            apuntes.apuntes.map((apunte) => {
-                apunte.asignatura == asignaturaObj.nombre ? data.push(apunte) : null
-            })
+            response = await apunteService.getApuntesByAsignatura(jwtToken.access_token, asignaturaCod)
         }
 
-        handleListaArchivos(data)
-        handleAsignatura(asignaturaObj)
-    }, [modulo])
+        response.data?.code === 200
+        ?   setListaArchivos(response.data?.result)
+        :   console.log(response)
+    }
 
+    useEffect(() => {
+        getAsignaturaByCod()
+        getFilesByAsignatura(modulo)
+    },[])
 
 
     // =======================================================================
     // RETURN DEL COMPONENTE ASIGNATURA
     return (
         <>
-            <Header title={asignatura.cod} />
+            <Header title={asignaturaCod} />
             {
-                modulo == 'examenes'
-                &&
                 !archivo
                 &&
                 <div className="asignatura">
                     <p className="asignaturaTitle">
                         {
                             listaArchivos.length > 0
-                                ? <span>Estos son los examenes disponibles para: <b>{asignatura.nombre}</b></span>
-                                : <span>No hay examenes subidos aun</span>
+                                ?   
+                                    modulo === 'examenes'
+                                    ?   <span>Estos son los examenes disponibles para: <b>{asignatura.nombre}</b></span>
+                                    :   <span>Estos son los apuntes disponibles para: <b>{asignatura.nombre}</b></span>
+                                :   <span>No hay examenes subidos aun</span>
                         }
                     </p>
                     <section className='asginaturaDataContainer'>
                         {
-                            listaArchivos.map((elemento, indice) => {
+                            listaArchivos.map((elemento) => {
+                                const date = new Date(elemento.fecha)
                                 return (
                                     <article
-                                        key={indice}
+                                        key={elemento.cod}
                                         className="asignaturaDataElement"
                                         onClick={() => handleArchivo(elemento)}
                                     >
                                         <AiOutlineFilePdf size={30} className='asignaturaDataElementIcon' />
                                         <span>
-                                            Año: {elemento.anio}
+                                            Cod:
+                                        </span>
+                                        <span style={{'fontSize':'14px','fontWeight':'bold'}}>
+                                            {elemento.cod}
                                         </span>
                                         <span>
-                                            Trimestre: {elemento.trimestre}
+                                            Fecha:
                                         </span>
-                                    </article>
-                                )
-                            })
-                        }
-                    </section>
-                </div>
-            }
-            {
-                modulo == 'apuntes'
-                &&
-                !archivo
-                &&
-                <div className="asignatura">
-                    <p className="asignaturaTitle">
-                        {
-                            listaArchivos.length > 0
-                                ? <span>Estos son los apuntes disponibles para: <b>{asignatura.nombre}</b></span>
-                                : <span>No hay apuntes subidos aun</span>
-                        }
-                    </p>
-                    <section className='asginaturaDataContainer'>
-                        {
-                            listaArchivos.map((elemento, indice) => {
-                                return (
-                                    <article
-                                        key={indice}
-                                        className="asignaturaDataElement"
-                                        onClick={() => handleArchivo(elemento)}
-                                    >
-                                        <AiOutlineFileText size={30} className='asignaturaDataElementIcon' />
-                                        <span>
-                                            {elemento.nombre}
-                                        </span>
-                                        <span>
-                                            Autor:<br />{elemento.usuario}
+                                        <span style={{'fontSize':'14px','fontWeight':'bold'}}>
+                                            {`${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`}
                                         </span>
                                     </article>
                                 )

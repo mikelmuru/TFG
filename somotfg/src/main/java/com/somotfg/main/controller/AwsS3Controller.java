@@ -23,8 +23,8 @@ public class AwsS3Controller {
     private AwsS3Service s3Service;
 
     @GetMapping("/getfile")
-    public ResponseEntity<DescargableDTO> getFile(@RequestParam("filename") String filename) {
-        DescargableDTO bytes = s3Service.downloadFile(filename);
+    public ResponseEntity<DescargableDTO> getFile(@RequestParam("filecod") String filecod) {
+        DescargableDTO bytes = s3Service.downloadFile(filecod);
         return ResponseEntity.ok().body(bytes);
     }
 }

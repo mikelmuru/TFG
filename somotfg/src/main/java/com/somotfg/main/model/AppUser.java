@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Data
 @AllArgsConstructor
@@ -19,13 +20,21 @@ public class AppUser {
     private Long id;
 
     @Column(unique = true)
+    @NonNull
     private String username;
     
+    @NonNull
     private String nombre;
+
+    @NonNull
     private String apellido;
     private String mail;
+
+    @NonNull
     private String role;
+
+    @NonNull
     private String password;
 
-    private Boolean eliminado;
+    private Boolean eliminado = false;
 }

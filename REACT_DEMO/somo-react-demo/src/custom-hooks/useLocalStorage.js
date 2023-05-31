@@ -26,7 +26,10 @@ export function useLocalStorage (key, initialVal) {
 
 export function cleanLocalStorage (key) {
     try {
-        window.localStorage.removeItem(key)
+        key
+        ?   window.localStorage.removeItem(key)
+        :   window.localStorage.clear()
+        
     } catch (error) {
         console.log(error)
     } 
@@ -46,5 +49,6 @@ export function readLocalStorageNoRender(key) {
         return item ? JSON.parse(item) : null
     } catch (error) {
         console.log(error)
+        return null
     }
 }

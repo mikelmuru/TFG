@@ -16,8 +16,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.somotfg.main.dto.AsignaturaDTO;
 import com.somotfg.main.dto.ExamenDTO;
+import com.somotfg.main.dto.ExamenNewDTO;
 import com.somotfg.main.model.AppUser;
 import com.somotfg.main.model.Asignatura;
 import com.somotfg.main.model.Examen;
@@ -72,6 +72,22 @@ public class ExamenService implements IExamenService {
             model.setAsignatura(asignatura.get());
         }
     
+        return model;
+    }
+
+    private Examen newdto2model(ExamenNewDTO dto) {
+        Examen model = new Examen();
+        model = modelMapper.map(dto, Examen.class);
+
+        Date actual = new Date();
+        Optional<AppUser> autor = userRepository.findByUsername(dto.getAutor());
+        Optional<Asignatura> asignatura = asignaturaRepository.findByCod(dto.getAsignaturaCod());
+        if (autor.isPresent() && asignatura.isPresent()) {
+            model.setAutor(autor.get());
+            model.setAsignatura(asignatura.get());
+            model.setFecha(actual);
+        }
+
         return model;
     }
     
@@ -198,13 +214,12 @@ public class ExamenService implements IExamenService {
     }
 
     @Override
-    public GenericResponse<List<ExamenDTO>> searchByAsignatura(AsignaturaDTO asignatura) throws Exception {
+    public GenericResponse<List<ExamenDTO>> searchByAsignatura(String asignaturacod) throws Exception {
         GenericResponse<List<ExamenDTO>> result = new GenericResponse<>();
-        Asignatura asignaturamodel = modelMapper.map(asignatura, Asignatura.class);
         List<ExamenDTO> dtos = new ArrayList<>();
 
         // List<Examen> examenes = repository.findByAsignatura(asignaturamodel);
-        List<Examen> examenes = repository.findByAsignaturaCod(asignaturamodel.getCod());
+        List<Examen> examenes = repository.findByAsignaturaCod(asignaturacod);
         for (Examen examen : examenes) {
             // ExamenDTO dto = modelMapper.map(examen, ExamenDTO.class);
             ExamenDTO dto = model2dto(examen);
@@ -245,17 +260,16 @@ public class ExamenService implements IExamenService {
         return result;
     }
 
+    // ===================****CREATE METHODS****===================
+
     @Override
-    public GenericResponse<ExamenDTO> create(ExamenDTO examData, MultipartFile file) throws Exception {
+    public GenericResponse<ExamenDTO> create(ExamenNewDTO examData, MultipartFile file) throws Exception {
         GenericResponse<ExamenDTO> result = new GenericResponse<>();
         GenericResponse<ExamenDTO> saved = new GenericResponse<>();
         String refS3 = "";
 
-        Date actual = new Date();
-        examData.setFecha(actual);
-
         try {
-            saved = save(dto2model(examData));
+            saved = save(newdto2model(examData));
             if (saved.getCode() == 201) {
                 refS3 = s3Service.uploadFile(file, examData.getCod());
                 if (refS3 != "") {

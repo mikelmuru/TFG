@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.somotfg.main.dto.AppUserDTO;
+import com.somotfg.main.dto.AppUserSingUpDTO;
 import com.somotfg.main.util.response.GenericResponse;
 
 @Service
@@ -19,7 +20,7 @@ public interface IAppUserService {
     GenericResponse<List<AppUserDTO>> searchByFiltro(String filtro) throws Exception;
 
     //  SAVE METHODS =====================
-    GenericResponse<AppUserDTO> create(AppUserDTO newuser) throws Exception;
+    GenericResponse<AppUserDTO> create(AppUserSingUpDTO newuser) throws Exception;
 
     //  UPDATE METHODS =====================
     GenericResponse<AppUserDTO> update(AppUserDTO newdata) throws Exception;

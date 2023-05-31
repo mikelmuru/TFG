@@ -1,6 +1,7 @@
 package com.somotfg.main.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,6 +21,8 @@ public interface ApuntesRepository extends JpaRepository<Apunte, Long> {
     List<Apunte> findByAsignaturaCod(String cod);
 
     List<Apunte> findByAutor(AppUser autor);
+
+    Optional<Apunte> findByCod(String cod);
 
     // POSIBILIDAD DE BUSCAR POR ASIGNATURA Y COD SIN IMPORTAR MAYUS Y MINUS
     @Query("select p from Apunte p "

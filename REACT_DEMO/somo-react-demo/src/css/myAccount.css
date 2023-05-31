@@ -123,6 +123,7 @@
     border-radius: 15px;
 }
 .apuntesUnidadNombre {
+    text-align: center;
     padding-left: .25vw;
     padding-right: .25vw;
 }
@@ -145,10 +146,13 @@
     cursor: pointer;
     border-radius: 35px;
     right: .5vw;
-    width: 55px;
+    width: 45px;
     height: 65px;
 }
 
+.tipoexamenes {
+    margin-top: 2vh;
+}
 /*==================================================================*/
 /* AQUI SE PONEN ESTILOS ESPECIFICOS PARA VARIOS ELEMENTOS */
 /*==================================================================*/

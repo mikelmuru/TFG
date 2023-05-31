@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  somotfgdb:
+    container_name: somotfgdb
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - /SomoTfg:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=1234Abcd

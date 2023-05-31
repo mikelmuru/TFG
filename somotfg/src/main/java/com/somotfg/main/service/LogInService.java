@@ -11,6 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.somotfg.main.dto.AppUserDTO;
+import com.somotfg.main.dto.AppUserLoginDTO;
+import com.somotfg.main.dto.AppUserSingUpDTO;
 import com.somotfg.main.model.AppUser;
 import com.somotfg.main.repository.AppUserRepository;
 import com.somotfg.main.security.JwtTokenUtil;
@@ -32,7 +34,7 @@ public class LogInService {
     private AuthenticationManager authenticationManager;
     
 
-    public Map<String, String> validateLogIn(AppUserDTO userdto) {
+    public Map<String, String> validateLogIn(AppUserLoginDTO userdto) {
         
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userdto.getUsername(), userdto.getPassword());
         
@@ -46,11 +48,13 @@ public class LogInService {
         Map<String, String> tokens = new HashMap<>();
         tokens.put("access_token", accessToken);
         tokens.put("refresh_token", refreshToken);
+        tokens.put("username", userdto.getUsername());
 
         return tokens;
     }
 
-    public GenericResponse<AppUserDTO> singUp(AppUserDTO userdto) throws Exception {
+    public GenericResponse<AppUserDTO> singUp(AppUserSingUpDTO userdto) throws Exception {
+        userdto.setRole("alumno");
         GenericResponse<AppUserDTO> saved = userService.create(userdto);
 
         return saved;

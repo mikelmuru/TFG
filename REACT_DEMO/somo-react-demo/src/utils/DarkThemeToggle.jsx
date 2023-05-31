@@ -6,16 +6,17 @@ export function DarkToggle() {
     const DARK_CLASS = 'dark'
     const LIGHT_CLASS = 'light'
 
-    const [darkTheme, setDarkTheme] = useState(true)
+    const [darkTheme, setDarkTheme] = useState(document.documentElement.className)
 
     const handleTheme = () => {
-        setDarkTheme(!darkTheme)
-        if (darkTheme) {
+        if (darkTheme == LIGHT_CLASS) {
             document.documentElement.classList.add(DARK_CLASS)
             document.documentElement.classList.remove(LIGHT_CLASS)
+            setDarkTheme(DARK_CLASS)
         } else {
             document.documentElement.classList.add(LIGHT_CLASS)
             document.documentElement.classList.remove(DARK_CLASS)
+            setDarkTheme(LIGHT_CLASS)
         }
     }
 

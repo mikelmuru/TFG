@@ -3,6 +3,7 @@ package com.somotfg.main.service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,12 +18,21 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
 import com.somotfg.main.dto.DescargableDTO;
+import com.somotfg.main.model.Apunte;
+import com.somotfg.main.model.Examen;
+import com.somotfg.main.repository.ApuntesRepository;
+import com.somotfg.main.repository.ExamenRepository;
 
 @Service
 public class AwsS3Service {
     
     @Autowired
     private AmazonS3 amazonS3;
+
+    @Autowired
+    private ApuntesRepository apuntesRepository;
+    @Autowired
+    private ExamenRepository examenesRepository;
 
     @Value("${aws.s3.bucket}")
     private String bucketName;
@@ -53,8 +63,20 @@ public class AwsS3Service {
         return result;
     }
 
-    public DescargableDTO downloadFile(String filename) {
-        S3Object object = amazonS3.getObject(bucketName, filename);
+    public DescargableDTO downloadFile(String filecod) {
+
+        String cod = "";
+        Optional<Apunte> archivo = apuntesRepository.findByCod(filecod);
+        if (archivo.isPresent()) {
+            cod = archivo.get().getRefS3();
+        } else {
+            Optional<Examen> examen = examenesRepository.findByCod(filecod);
+            if (examen.isPresent()) {
+                cod = examen.get().getRefS3();
+            }
+        }
+
+        S3Object object = amazonS3.getObject(bucketName, cod);
         S3ObjectInputStream objectContent = object.getObjectContent();
         DescargableDTO result = new DescargableDTO();
         try {

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.somotfg.main.dto.ApunteDTO;
-import com.somotfg.main.dto.AsignaturaDTO;
+import com.somotfg.main.dto.ApunteNewDTO;
 import com.somotfg.main.util.response.GenericResponse;
 
 @Service
@@ -17,12 +17,12 @@ public interface IApunteService {
     GenericResponse<List<ApunteDTO>> searchPaginationSorting(Integer offset, Integer pageSize, String fieldSort) throws Exception;
     GenericResponse<ApunteDTO> searchById(Long id) throws Exception;
     GenericResponse<List<ApunteDTO>> searchByUsername(String username) throws Exception;
-    GenericResponse<List<ApunteDTO>> searchByAsignatura(AsignaturaDTO asignatura) throws Exception;
+    GenericResponse<List<ApunteDTO>> searchByAsignatura(String asignaturacod) throws Exception;
     GenericResponse<List<ApunteDTO>> searchByFiltro(String filtro) throws Exception;
     // GenericResponse<List<ApunteDTO>> searchByGrado(String grado) throws Exception;
 
     //  SAVE METHODS =====================
-    GenericResponse<ApunteDTO> create(ApunteDTO newapuntes, MultipartFile file) throws Exception;
+    GenericResponse<ApunteDTO> create(ApunteNewDTO newapuntes, MultipartFile file) throws Exception;
 
     //  UPDATE METHODS =====================
     GenericResponse<ApunteDTO> update(ApunteDTO newdata) throws Exception;

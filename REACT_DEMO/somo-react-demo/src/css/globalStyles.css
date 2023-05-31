@@ -18,6 +18,9 @@ html.light {
     --listaDiHoverGrad2: #bbe6e4ce;
     --listaDiHoverGrad3: white;
 
+    --chatMsgWhoColor: #16afd5b5;
+    --chatMsgMsgColor: #bee9e7;
+
     --defaultBgColor: #ffffff;
 
     --defaultMainTextColor: #000;
@@ -61,6 +64,9 @@ html.dark {
     --listaDiHoverGrad2: #415a77;
     --listaDiHoverGrad3: #1c1c1c;
 
+    --chatMsgWhoColor: #3a3f46;
+    --chatMsgMsgColor: #465765;
+
     --defaultBgColor: #1c1c1c;
     --defaultMainTextColor: #fff;
     --defaultInfoTextColor: #b8b8b8;
@@ -87,7 +93,8 @@ html {
     color: var(--defaultInfoTextColor);
 }
 
-hr, .hr {
+hr,
+.hr {
     height: 1px;
     border: 0;
     background-color: var(--borderColor);
@@ -129,6 +136,7 @@ hr, .hr {
     padding-top: 1vh;
     padding-bottom: 1vh;
 }
+
 .goBackNav {
     display: flex;
     justify-content: center;
@@ -138,9 +146,11 @@ hr, .hr {
     cursor: pointer;
     border-radius: 20px;
 }
-.goBackNav > .menuOptionIcon {
+
+.goBackNav>.menuOptionIcon {
     place-content: center;
 }
+
 .headerTitle {
     position: absolute;
     width: calc(100% - 50px);
@@ -151,18 +161,30 @@ hr, .hr {
     font-size: large;
 }
 
+.logOutSection,
+.logOutBtn {
+    color: var(--defaultInfoTextColor);
+}
+.logOutSection:hover,
+.logOutSection:hover .logOutBtn {
+    color: var(--fullContrast);
+}
+
 /*------>>> SEARCHBAR <<<-------*/
 .searchBarTextArea {
     background-color: var(--searchBarTxtAreaColor);
 }
+
 .searchBarTextAreaInput {
     border: none;
     background-color: transparent;
     color: var(--defaultInfoTextColor);
 }
+
 .searchBarTextAreaInput:focus {
     outline: none;
 }
+
 .searchBarTextAreaIcon {
     color: var(--searchBarIconColor);
 }
@@ -174,6 +196,7 @@ hr, .hr {
     border: none;
     cursor: pointer;
 }
+
 .searchBarSelectionOpt:hover {
     box-shadow: 0px 0px 10px var(--mainColor3);
     background: linear-gradient(45deg, var(--btnBgAnimationColor1), var(--btnBgAnimationColor2), var(--btnBgAnimationColor3));
@@ -184,7 +207,7 @@ hr, .hr {
 
 
 /*------>>> CONTENT <<<-------*/
-.moduloContent > p {
+.moduloContent>p {
     margin: 0px;
 }
 
@@ -192,16 +215,20 @@ hr, .hr {
 .listaDinamicaLink {
     background-color: transparent;
 }
+
 .listaDinamicaLink:hover {
     background: radial-gradient(var(--listaDiHoverGrad1) 0, var(--listaDiHoverGrad2) 0, var(--listaDiHoverGrad3) 75%);
 }
+
 .listaDinamicaIcon {
     color: var(--listaDincamicaIconColor);
 }
+
 .listaDinamicaSpan {
     color: var(--defaultInfoTextColor);
 }
-.listaDinamicaLink:hover > .listaDinamicaSpan {
+
+.listaDinamicaLink:hover>.listaDinamicaSpan {
     color: var(--defaultMainTextColor);
 }
 
@@ -213,6 +240,7 @@ hr, .hr {
     border: .25px solid var(--borderColor2);
     margin-top: 1vh;
 }
+
 .gradoOpenCursoBtn:hover {
     color: var(--defaultMainTextColor);
 }
@@ -226,6 +254,7 @@ hr, .hr {
     background-color: transparent;
     color: var(--defaultInfoTextColor);
 }
+
 .gradoAsignaturasOpt:hover {
     color: var(--defaultMainTextColor);
 }
@@ -235,6 +264,7 @@ hr, .hr {
 .apuntesUsuarioTitle b {
     color: var(--defaultMainTextColor);
 }
+
 .apuntesUsuarioApunte:hover {
     box-shadow: 0px 0px 10px var(--mainColor3);
     background: linear-gradient(45deg, var(--btnBgAnimationColor1), var(--btnBgAnimationColor2), var(--btnBgAnimationColor3));
@@ -248,6 +278,7 @@ hr, .hr {
 .asignaturaTitle span b {
     color: var(--defaultMainTextColor);
 }
+
 .asignaturaDataElement:hover {
     box-shadow: 0px 0px 10px var(--mainColor3);
     background: linear-gradient(45deg, var(--btnBgAnimationColor1), var(--btnBgAnimationColor2), var(--btnBgAnimationColor3));
@@ -262,13 +293,20 @@ hr, .hr {
     box-shadow: 0px 0px 10px var(--mainColor3);
     border: .5px solid var(--borderColor);
 }
+
 .archivoHeaderIconContainer,
 .archivoTitle {
     color: var(--fullContrast);
 }
+
 .archivoInfoDato {
     border-bottom: .5px solid var(--borderColor2);
 }
+
+.descargableLink {
+    color: var(--fullContrast);
+}
+
 .archivoDownloadContainer:hover {
     box-shadow: 0px 0px 15px var(--mainColor3);
     background: linear-gradient(45deg, var(--btnBgAnimationColor1), var(--btnBgAnimationColor2), var(--btnBgAnimationColor3));
@@ -285,15 +323,18 @@ hr, .hr {
     animation: archivoBgMove 5s ease-in-out infinite;
     color: var(--defaultMainTextColor);
 }
+
 .myAccountPersonalInfo,
 .myAccountApuntes {
     background-color: var(--defaultBgColor);
 }
+
 .myAccountPersonalInfoDato,
 .apuntesOpenBtn {
     color: var(--fullContrast);
     border-bottom: 1px solid var(--borderColor2);
 }
+
 .myAccountHeadTitle {
     border: none;
 }
@@ -306,9 +347,11 @@ hr, .hr {
     border: none;
     background-color: transparent;
 }
+
 .apuntesUnidad {
     color: var(--defaultInfoTextColor);
 }
+
 .apuntesUnidadOpt:hover {
     color: var(--fullContrast);
 }
@@ -316,10 +359,6 @@ hr, .hr {
 .apuntesAddNew {
     box-shadow: 0px 0px 10px var(--mainColor3);
     background-color: var(--defaultBgColor);
-    /* background: linear-gradient(45deg, var(--btnBgAnimationColor1), var(--btnBgAnimationColor2), var(--btnBgAnimationColor3));
-    background-size: 250% 250%;
-    animation: archivoBgMove 3s ease-in-out infinite;
-    color: var(--defaultMainTextColor); */
 }
 
 /*------>>> Pop Up <<<-------*/
@@ -327,24 +366,29 @@ hr, .hr {
     background-color: var(--defaultBgColor);
     box-shadow: 0px 0px 5px var(--mainColor3);
 }
+
 .formOptTitle {
     border-bottom: .5px solid var(--borderColor2);
 }
+
 .formDropDownBtn {
     background-color: transparent;
     border: none;
     box-shadow: 0px 0px 5px var(--mainColor3);
     color: var(--fullContrast);
 }
+
 .formOpt:hover {
     font-weight: bold;
 }
+
 .updateNameInput {
     box-shadow: 0px 0px 5px var(--mainColor3);
     border: none;
     background-color: var(--defaultBgColor);
     color: var(--fullContrast);
 }
+
 .uploadContainer {
     box-shadow: 0px 0px 10px var(--mainColor3);
     background: linear-gradient(45deg, var(--btnBgAnimationColor1), var(--btnBgAnimationColor2), var(--btnBgAnimationColor3));
@@ -352,12 +396,77 @@ hr, .hr {
     animation: archivoBgMove 3s ease-in-out infinite;
     color: var(--defaultMainTextColor);
 }
+
 .myAccountHr {
     background: linear-gradient(to right, var(--defaultBgColor), var(--fullContrast), var(--defaultBgColor));
     background-size: 200% 200%;
     animation: hrColorMove 4s ease-in-out infinite;
 }
 
+/*------>>> LogIn & SingUp <<<-------*/
+.errorMsg {
+    color: red;
+    font-size: 12px;
+}
+.btn {
+    color: var(--defaultInfoTextColor);
+    border: .25px solid var(--borderColor2);
+    border-radius: 15px;
+    padding: .25rem;
+    background-color: transparent;
+}
+.btn:hover {
+    border: .25px solid var(--defaultMainTextColor);
+    background: linear-gradient(45deg, var(--btnBgAnimationColor1), var(--btnBgAnimationColor2), var(--btnBgAnimationColor3));
+    background-size: 250% 250%;
+    animation: archivoBgMove 3s ease-in-out infinite;
+    color: var(--defaultMainTextColor);
+}
+.loginOpt {
+    color: var(--defaultInfoTextColor);
+    border: .5px solid var(--borderColor2);
+    background-color: var(--searchBarTxtAreaColor);
+}
+.loginOpt:focus {
+    outline: none;
+}
+
+/*------>>> Chat <<<-------*/
+.chatContainer {
+    background: linear-gradient(45deg, var(--myAccAnimationColor1), var(--myAccAnimationColor2), var(--myAccAnimationColor3));
+    background-size: 250% 250%;
+    animation: archivoBgMove 5s ease-in-out infinite;
+    color: var(--defaultMainTextColor);
+}
+.chatMensajeWho {
+    background-color: var(--chatMsgWhoColor);
+}
+.chatMensajeMsg {
+    background-color: var(--chatMsgMsgColor);
+}
+
+.newmessage {
+    border: .5px solid var(--borderColor2);
+    background-color: var(--searchBarTxtAreaColor);
+}
+.newMsgInput {
+    border: none;
+    background-color: transparent;
+    color: var(--defaultInfoTextColor);
+}
+.newMsgInput:focus {
+    outline: none;
+}
+.newMsgBtn {
+    border: none;
+    background-color: transparent;
+}
+.newMsgIcon {
+    color: var(--searchBarIconColor);
+}
+.newMsgIcon:hover {
+    color: var(--defaultMainTextColor);
+}
 
 /* ================================================================= */
 /* =================== ESTILOS CLASES GLOBALES ===================== */
@@ -382,10 +491,12 @@ hr, .hr {
     .menuOptionLabel {
         display: none;
     }
+
     .menuOption {
         justify-content: center;
     }
 }
+
 @media (max-width: 1500px) {
     .appMenuDer .menuOptionLabel {
         display: none;
@@ -404,31 +515,39 @@ hr, .hr {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
 }
+
 @keyframes hrColorMove {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
 }
+
 @keyframes inputHabilitado {
     0% {
         box-shadow: 0px 0px 0px transparent;
     }
+
     50% {
         box-shadow: 0px 0px 10px var(--myAccountPersonalInfoShadow);
     }
+
     100% {
         box-shadow: 0px 0px 0px transparent;
     }
