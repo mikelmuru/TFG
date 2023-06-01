@@ -1,0 +1,51 @@
+.login {
+    position: fixed;
+    top: 10vh;
+    left: 10vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80vw;
+    height: 80vh;
+}
+
+.loginTitleTxt {
+    background: linear-gradient(45deg, #084b83, #007ea7, #42bfdd);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.welcomeMsg {
+    text-align: center;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    place-content: center;
+    margin-top: .5rem;
+    padding: .5rem;
+    height: 40vh;
+    gap: 1vh;
+    border-radius: 20px;
+}
+.loginOpt {
+    padding: .25rem;
+    border-radius: 5px;
+}
+.loginBtn {
+    width: 50%;
+    cursor: pointer;
+}
+.optionBtn {
+    margin-bottom: .5rem;
+}
+.optionBtnTxt {
+    cursor: pointer;
+    padding: .5rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
+}

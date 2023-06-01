@@ -1,0 +1,38 @@
+.asignatura {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.asginaturaDataContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    row-gap: 30px;
+    column-gap: 10vw;
+    padding-top: 2.5vh;
+}
+
+.asignaturaTitle, .asignaturaTitle > span {
+    text-align: center;
+}
+
+.asignaturaDataElement {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    padding: .5rem;
+    overflow: hidden;
+    width: 100px;
+    height: 120px;
+    border-radius: 25px;
+}
+
+.asignaturaDataElementIcon {
+    margin-bottom: auto;
+}

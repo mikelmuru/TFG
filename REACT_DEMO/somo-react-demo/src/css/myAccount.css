@@ -1,0 +1,187 @@
+.myAccountContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    border-radius: 30px;
+}
+
+
+.myAccountPersonalInfo {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    border-radius: 20px;
+    gap: 2vh;
+    padding-bottom: 2vh;
+}
+
+.myAccountPersonalInfoDato {
+    height: 100%;
+    margin: 0px;
+    margin-left: 2vw;
+    padding: 0px;
+    width: 50%;
+    background-color: transparent;
+    border: none;
+}
+.myAccountPersonalInfoDato:focus {
+    outline: none;
+}
+
+
+.myAccountPersonalInfoHead {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 20px;
+}
+.myAccountHeadTitle {
+    padding: 0px;
+    margin-left: 50px;
+    width: calc(100% - 100px);
+    text-align: center;
+    font-size: 18px;
+    border: none;
+    
+}
+.myAccountHeadIconContainer {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+.myAccountHeadIconContainer > .myAccountHeadIcon {
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+}
+.myAccountHeadIconContainer > .moreMarginLeft {
+    margin-left: 25px;
+}
+
+
+
+
+.myAccountHr {
+    width: 80%;
+    height: .10vh;
+}
+
+
+
+
+.myAccountApuntes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    border-radius: 20px;
+}
+.apuntesOpenBtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    cursor: pointer;
+}
+.apuntesOpenTitle {
+    padding-top: .5vh;
+    padding-bottom: .5vh;
+}
+.apuntesOpenIcon {
+    margin-left: 2vw;
+}
+
+.apuntesContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+    column-gap: 2vw;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    overflow: scroll;
+}
+.apuntesContainer::-webkit-scrollbar {
+    display: none;
+}
+.apuntesUnidad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 110px;
+    row-gap: 1vh;
+    border-radius: 15px;
+}
+.apuntesUnidadNombre {
+    text-align: center;
+    padding-left: .25vw;
+    padding-right: .25vw;
+}
+.apuntesUnidadPrimero {
+    margin-left: 2vw;
+}
+.apuntesUnidadOpts {
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+}
+.apuntesUnidadOpt {
+    cursor: pointer;
+}
+.apuntesAddNew {
+    position: sticky;
+    display: flex;
+    place-items: center;
+    place-content: center;
+    cursor: pointer;
+    border-radius: 35px;
+    right: .5vw;
+    width: 45px;
+    height: 65px;
+}
+
+.tipoexamenes {
+    margin-top: 2vh;
+}
+/*==================================================================*/
+/* AQUI SE PONEN ESTILOS ESPECIFICOS PARA VARIOS ELEMENTOS */
+/*==================================================================*/
+
+.myAccountHeadTitle,
+.apuntesOpenTitle {
+    font-weight: bold;
+}
+
+/* PADDING-TOP 1VH */
+.myAccountPersonalInfoDato,
+.myAccountPersonalInfoHead,
+.apuntesOpenBtn {
+    padding-top: 1vh;
+}
+/* PADDING-BOTTOM 1VH */
+.myAccountPersonalInfoDato,
+.myAccountPersonalInfoHead,
+.apuntesOpenBtn {
+    padding-bottom: 1vh;
+}
+/* PADDING-RIGHT 1VW */
+.myAccountPersonalInfoHead,
+.apuntesAddNew {
+    padding-right: 1vw;
+}
+/* PADDING-LEFT 1VW */
+.myAccountPersonalInfoDato,
+.myAccountPersonalInfoHead,
+.apuntesAddNew {
+    padding-left: 1vw;
+}

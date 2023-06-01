@@ -1,0 +1,14 @@
+package com.somotfg.main.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class GradoDTO {
+    private Long id;
+    private String cod;
+    private String nombre;
+}

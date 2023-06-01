@@ -1,0 +1,8 @@
+#   NO SE COMMITEAN LOS ARCHIVOS DE TEXTO.
+*.txt
+**/node_modules
+**/nosubir.properties
+*.png
+*.pdf
+**.png
+**.pdf

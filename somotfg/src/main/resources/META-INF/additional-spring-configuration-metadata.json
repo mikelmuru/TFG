@@ -1,0 +1,32 @@
+{"properties": [
+  {
+    "name": "aws.access.key.id",
+    "type": "java.lang.String",
+    "description": "La key para acceder al bucket de S3"
+  },
+  {
+    "name": "aws.access.key.secret",
+    "type": "java.lang.String",
+    "description": "La key secreta para acceder al bucket de S3"
+  },
+  {
+    "name": "aws.s3.bucket",
+    "type": "java.lang.String",
+    "description": "Nombre del bucket al que se accede"
+  },
+  {
+    "name": "aws.s3.region",
+    "type": "java.lang.String",
+    "description": "Nombre de la region del bucket de S3"
+  },
+  {
+    "name": "jwt.secret",
+    "type": "java.lang.String",
+    "description": "Clave secreta para generar el algoritmo de jwt"
+  },
+  {
+    "name": "jwt.issuer",
+    "type": "java.lang.String",
+    "description": "Emisor del token"
+  }
+]}

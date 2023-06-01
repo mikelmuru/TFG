@@ -1,0 +1,47 @@
+.menuOption,
+.themeHandleBtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    background-color: none;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: .5vh;
+    padding-bottom: .5vh;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    transition: color .25s;
+}
+
+.menuOption:hover,
+.themeHandleBtn:hover {
+    /* background-color: rgba(130, 129, 129, 0.767);
+    color: rgb(30, 29, 29); */
+    font-weight: bold;
+    transition: background-color color 1s;
+    transition: color .25s;
+}
+
+.themeHandleBtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: .5vh;
+    padding-bottom: .5vh;
+    margin-right: 2.5vw;
+    margin-left: 2.5vw;
+    border-radius: 5px;
+}
+
+.appMenuIzq {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.appMenuDer {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}

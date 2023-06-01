@@ -1,0 +1,148 @@
+{
+  "grados": [
+    {
+      "nombre": "Grado en Educacion Infantil",
+      "curso1": [
+        {
+          "nombre": "Didáctica de la Educación Infantil",
+          "cod": "DEI-456"
+        },
+        {
+          "nombre": "Psicología del Desarrollo Infantil",
+          "cod": "PDI-789"
+        }
+      ],
+      "curso2": [
+        {
+          "nombre": "Educación Inclusiva",
+          "cod": "EI-123"
+        },
+        {
+          "nombre": "Organización y Gestión de Centros Educativos",
+          "cod": "OGCE-987"
+        }
+      ],
+      "cod": "GEI-120"
+    },
+    {
+      "nombre": "Grado en Mecanizado",
+      "curso1": [
+        {
+          "nombre": "Dibujo Técnico",
+          "cod": "DT-654"
+        },
+        {
+          "nombre": "Fundamentos de Mecánica",
+          "cod": "FM-321"
+        }
+      ],
+      "curso2": [
+        {
+          "nombre": "Máquinas y Herramientas",
+          "cod": "MH-987"
+        },
+        {
+          "nombre": "Sistemas CAD-CAM",
+          "cod": "SCC-456"
+        }
+      ],
+      "cod": "GM-187"
+    },
+    {
+      "nombre": "Grado en Soldadura",
+      "curso1": [
+        {
+          "nombre": "Materiales y Procesos de Soldadura",
+          "cod": "MPS-789"
+        },
+        {
+          "nombre": "Seguridad en Soldadura",
+          "cod": "SS-654"
+        }
+      ],
+      "curso2": [
+        {
+          "nombre": "Tecnologías de Soldadura Especiales",
+          "cod": "TSE-123"
+        },
+        {
+          "nombre": "Ensayos no Destructivos",
+          "cod": "END-321"
+        }
+      ],
+      "cod": "GS-165"
+    },
+    {
+      "nombre": "Grado en Medicina",
+      "curso1": [
+        {
+          "nombre": "Anatomía Humana",
+          "cod": "AH-987"
+        },
+        {
+          "nombre": "Bioquímica Médica",
+          "cod": "BM-456"
+        }
+      ],
+      "curso2": [
+        {
+          "nombre": "Fisiología Médica",
+          "cod": "FM-654"
+        },
+        {
+          "nombre": "Patología Médica",
+          "cod": "PM-321"
+        }
+      ],
+      "cod": "GM-143"
+    },
+    {
+      "nombre": "Grado en Desarrollo Web",
+      "curso1": [
+        {
+          "nombre": "Programación Web",
+          "cod": "PW-123"
+        },
+        {
+          "nombre": "Bases de Datos",
+          "cod": "BD-321"
+        }
+      ],
+      "curso2": [
+        {
+          "nombre": "Diseño Web",
+          "cod": "DW-654"
+        },
+        {
+          "nombre": "Desarrollo de Aplicaciones Web",
+          "cod": "DAW-987"
+        }
+      ],
+      "cod": "GDW-147"
+    },
+    {
+      "nombre": "Grado en Administración de Empresas",
+      "curso1": [
+        {
+          "nombre": "Contabilidad Financiera",
+          "cod": "CF-789"
+        },
+        {
+          "nombre": "Economía de la Empresa",
+          "cod": "EE-123"
+        }
+      ],
+      "curso2": [
+        {
+          "nombre": "Marketing",
+          "cod": "MK-456"
+        },
+        {
+          "nombre": "Recursos Humanos",
+          "cod": "RH-321"
+        }
+      ],
+      "cod": "GAE-190"
+    }
+  ]
+}
