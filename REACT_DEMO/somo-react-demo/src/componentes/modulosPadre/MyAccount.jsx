@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Header } from "../../utils/Header";
 import { readLocalStorageNoRender } from '../../custom-hooks/useLocalStorage';
 import '../../css/myAccount.css'
@@ -8,6 +8,7 @@ import NewUpdateFile from '../../utils/PopUpNewUpdateArchivo'
 import * as userService from '../../servicios/userService'
 import * as apuntesService from '../../servicios/apunteService'
 import * as examenesService from '../../servicios/examenService'
+import { I18nContext } from '../../context/I18nContext';
 
 
 export function MyAccount() {
@@ -32,7 +33,8 @@ export function MyAccount() {
     const [tipoPopUp, setTipoPopUp] = useState('new')
     const [showArchivo, setShowArchivo] = useState(null)
     const [moduloPopUp, setModuloPopUp] = useState(null)
-
+    
+    const { language, i18n, setLanguage } = useContext(I18nContext)
 
     const userTokensNick = readLocalStorageNoRender('user')
 
@@ -130,7 +132,7 @@ export function MyAccount() {
 
     return (
         <>
-            <Header title='My Account' />
+            <Header title={i18n[language].menuMyAccount} />
             <div className='myAccountContainer'>
                 <section className='myAccountPersonalInfo'>
                     <div className='myAccountPersonalInfoHead'>
@@ -188,7 +190,7 @@ export function MyAccount() {
 
                 <MisArchivos
                     apuntes={apuntes}
-                    titulo={'Mis Apuntes'}
+                    titulo={i18n[language].accountMisApuntesTitulo}
                     modulo={'apuntes'}
                     handlePopUp={handlePopUp}
                     afterDel={reloadAfterDelete}
@@ -199,7 +201,7 @@ export function MyAccount() {
                     &&
                     <MisArchivos
                         apuntes={examenes ? examenes : null}
-                        titulo={'Mis Examenes'}
+                        titulo={i18n[language].accountMisExamenesTitulo}
                         modulo={'examenes'}
                         handlePopUp={handlePopUp}
                         afterDel={reloadAfterDelete}

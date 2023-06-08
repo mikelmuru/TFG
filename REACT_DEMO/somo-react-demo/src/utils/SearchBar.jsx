@@ -1,12 +1,15 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import '../css/searchBar.css'
 import { BsSearch } from 'react-icons/bs'
+import { I18nContext } from "../context/I18nContext"
 
 export function SearchBar({ filterType, handleFilter, handleTipoBusqueda, actualTipo }) {
 
     const actualModulo = actualTipo ? actualTipo : null
 
     const [selectionDisplay, setSelectionDisplay] = actualTipo ? useState('usuarios') : useState('')
+    const { language, i18n, setLanguage } = useContext(I18nContext)
+
 
     const useHandleFilter = (busqueda) => {
         handleFilter(busqueda)
@@ -48,7 +51,7 @@ export function SearchBar({ filterType, handleFilter, handleTipoBusqueda, actual
                                     searchBarSelectionOpt`
                                 }
                             >
-                                Grados
+                                {i18n[language].searchBarOptGrado}
                             </span>
                             <span
                                 onClick={() => useHandleTipoBusqueda('usuarios')}
@@ -59,7 +62,7 @@ export function SearchBar({ filterType, handleFilter, handleTipoBusqueda, actual
                                     searchBarSelectionOpt`
                                 }
                             >
-                                Usuarios
+                                {i18n[language].searchBarOptUsuario}
                             </span>
                         </div>
                         : null

@@ -4,12 +4,17 @@ import { useLocalStorage, cleanLocalStorage } from './custom-hooks/useLocalStora
 import { Contacto, Navegacion } from './componentes/Menus'
 import { allRoutes } from './utils/Constantes'
 import { HiLogout } from 'react-icons/hi'
+import HandleLanguage from './utils/HandleLanguage'
+import { I18nContext } from './context/I18nContext'
+import { useContext } from 'react'
 
 function App() {
 
   // HAY QUE REPASAR LA LIMPIEZA DEL LOCALSTORAGE --> DEBERIA DEPENDER DEL LOGIN / LOGOUT
   // cleanLocalStorage('modulo')
   // cleanLocalStorage('moduloFilteredBy')
+
+  const { language, i18n, setLanguage } = useContext(I18nContext)
 
   const [user, setUser] = useLocalStorage('user', null)
 
@@ -28,18 +33,20 @@ function App() {
         <h1 className='webTitle'>
           <span className="webTitleText">SOMO.pdf</span>
         </h1>
-        {
-          user
-          &&
-          <section className="logOutSection">
+
+        <section className="logOutSection">
+          <HandleLanguage />
+          {
+            user
+            &&
             <article className='logoutall' onClick={() => logOut()}>
               <button className='logOutBtn'>
-                LogOut
+                {i18n[language].logout}
               </button>
               <HiLogout size={20} />
             </article>
-          </section>
-        }
+          }
+        </section>
       </header>
 
       <div className='fullApp'>

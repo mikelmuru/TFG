@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Header } from "../../utils/Header";
 import { SearchBar } from "../../utils/SearchBar";
 import { ListaDinamica } from '../modulosIntermedio/ListaDinamica';
 import { ListaDinamicaContext } from '../../context/ListaDinamicaContext';
 import { readLocalStorageNoRender } from '../../custom-hooks/useLocalStorage';
 import * as gradoService from '../../servicios/gradosService';
+import { I18nContext } from '../../context/I18nContext';
 
 
 export function Foro() {
@@ -12,6 +13,8 @@ export function Foro() {
 
     const [filtro, setFiltro] = useState(null)
     const [data, setData] = useState([])
+    const { language, i18n, setLanguage } = useContext(I18nContext)
+
     const jwtToken = readLocalStorageNoRender('user')
 
     const handleFiltro = (busqueda) => {
@@ -56,7 +59,7 @@ export function Foro() {
 
     return (
         <>
-            <Header title='Foro' />
+            <Header title={i18n[language].menuForo} />
             <SearchBar
                 filterType={'busqueda'}
                 handleFilter={handleFiltro}

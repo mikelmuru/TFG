@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import * as AiIcons from 'react-icons/ai'
 import * as TbIcons from 'react-icons/tb'
 import * as apuntesService from '../../servicios/apunteService'
 import * as examenesService from '../../servicios/examenService'
 import { readLocalStorageNoRender } from '../../custom-hooks/useLocalStorage'
 import '../../css/popUps.css'
+import { I18nContext } from '../../context/I18nContext'
 
 
 export default function MisArchivos({ apuntes, titulo, modulo, handlePopUp, afterDel }) {
@@ -13,6 +14,8 @@ export default function MisArchivos({ apuntes, titulo, modulo, handlePopUp, afte
     const [isApunteOpen, setIsApunteOpen] = useState(false)
     const [confirmDelete, setConfirmDelete] = useState(false)
     const [deleteResponse, setDeleteResponse] = useState(false)
+
+    const { language, i18n, setLanguage } = useContext(I18nContext)
 
     const userTokensNick = readLocalStorageNoRender('user')
 
@@ -114,7 +117,7 @@ export default function MisArchivos({ apuntes, titulo, modulo, handlePopUp, afte
                     &&
                     apuntes.length == 0
                     &&
-                    <span>Aun no has subido nada!</span>
+                    <span>{i18n[language].accountMisArchivosNull}</span>
                 }
                 {
                     deleteResponse
@@ -129,7 +132,7 @@ export default function MisArchivos({ apuntes, titulo, modulo, handlePopUp, afte
                                             <AiIcons.AiOutlineCloseCircle size={25} />
                                         </span>
                                     </section>
-                                    <p>Tu archivo se ha eliminado correctamente.</p>
+                                    <p>{i18n[language].accountMisArchivosArchivoEliminado}</p>
                                 </section>
                                 :
                                 deleteResponse === 401 || deleteResponse === 500
@@ -140,7 +143,7 @@ export default function MisArchivos({ apuntes, titulo, modulo, handlePopUp, afte
                                             <AiIcons.AiOutlineCloseCircle size={25} />
                                         </span>
                                     </section>
-                                    <p>Ha habido un error!</p>
+                                    <p>{i18n[language].accountMisArchivosErrorEliminar}</p>
                                 </section>
                         }
                     </div>
