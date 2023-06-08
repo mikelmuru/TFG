@@ -1,10 +1,13 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { I18nContext } from "../context/I18nContext"
 
 
 export default function DropDown({ miArchivoInfo, grados, asignaturas, handleGrado, handleAsignatura }) {
 
     const [isGradoOpen, setIsGradoOpen] = useState(false)
     const [isAsignaturaOpen, setIsAsignaturaOpen] = useState(false)
+
+    const { language, i18n, setLanguage } = useContext(I18nContext)
 
     const handleIsGradoOpen = () => setIsGradoOpen(!isGradoOpen)
     const handleIsAsignaturaOpen = () => setIsAsignaturaOpen(!isAsignaturaOpen)
@@ -21,7 +24,7 @@ export default function DropDown({ miArchivoInfo, grados, asignaturas, handleGra
     return (
         <section className='formModuloInfo'>
             <span className='formOptTitle'>
-                Grado y Asignatura:
+                {i18n[language].accountPopUpGradoAsig}
             </span>
             <section className='formOptContainer'>
                 <button onClick={() => handleIsGradoOpen()} className='formDropDownBtn'>
@@ -45,7 +48,7 @@ export default function DropDown({ miArchivoInfo, grados, asignaturas, handleGra
                             </section>
                             :
                             <section className="formSelect">
-                                <span className="formOpt">Hay algun error con el servidor.</span>
+                                <span className="formOpt">{i18n[language].accountPopUpDrpDwnErrorGrado}</span>
                             </section>
                         :
                         null
@@ -71,7 +74,7 @@ export default function DropDown({ miArchivoInfo, grados, asignaturas, handleGra
                             </section>
                             :
                             <section className="formSelect">
-                                <span className="formOpt">No hay correspondencias.</span>
+                                <span className="formOpt">{i18n[language].accountPopUpDrpDwnErrorAsignatura}</span>
                             </section>
                         :
                         null

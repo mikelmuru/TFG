@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import * as AiIcons from 'react-icons/ai'
 import { Header } from '../../utils/Header';
 import '../../css/grado.css'
 import { readLocalStorageNoRender } from '../../custom-hooks/useLocalStorage';
 import * as asignaturaService from '../../servicios/asignaturaService';
+import { I18nContext } from '../../context/I18nContext';
 
 
 export function Grado() {
@@ -15,6 +16,8 @@ export function Grado() {
     const [openCurso1, setOpenCurso1] = useState(false)
     const [openCurso2, setOpenCurso2] = useState(false)
     const [asignaturas, setAsignaturas] = useState([])
+    const { language, i18n, setLanguage } = useContext(I18nContext)
+
 
     const jwtToken = readLocalStorageNoRender('user')
 
@@ -74,7 +77,7 @@ export function Grado() {
                             </div>
                             :
                             <div className="gradoAsignaturasContainer">
-                                <span>No hay asignaturas relacionadas.</span>
+                                <span>{i18n[language].gradoNoAsignaturas}</span>
                             </div>
                         : null
                 }
@@ -107,7 +110,7 @@ export function Grado() {
                             </div>
                             :
                             <div className="gradoAsignaturasContainer">
-                                <span>No hay asignaturas relacionadas.</span>
+                                <span>{i18n[language].gradoNoAsignaturas}</span>
                             </div>
                         : null
                 }

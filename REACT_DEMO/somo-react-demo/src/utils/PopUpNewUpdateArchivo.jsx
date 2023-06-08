@@ -1,6 +1,6 @@
 import '../css/popUps.css'
 import * as AiIcons from 'react-icons/ai'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack5'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
@@ -10,6 +10,7 @@ import * as asignaturaService from '../servicios/asignaturaService';
 import * as apunteService from '../servicios/apunteService'
 import * as examenService from '../servicios/examenService'
 import DropDown from './DropDown';
+import { I18nContext } from '../context/I18nContext';
 
 
 
@@ -34,6 +35,8 @@ export default function NewUpdateFile({ archivo = null, handleClose, tipo, tipoa
     const [grados, setGrados] = useState([])
     const [asignaturas, setAsignaturas] = useState([])
     const [actionResponse, setActionResponse] = useState(false)
+
+    const { language, i18n, setLanguage } = useContext(I18nContext)
 
     console.log(actionResponse)
 
@@ -192,7 +195,11 @@ export default function NewUpdateFile({ archivo = null, handleClose, tipo, tipoa
                             </span>
                         </section>
                         {
-                            tipo === 'new' ? <p className='popUpTitle'>Publica tu archivo</p> : <p className='popUpTitle'>{archivo.cod}</p>
+                            tipo === 'new'
+                            ?
+                            <p className='popUpTitle'>{i18n[language].accountPopUpNewFile}</p>
+                            :
+                            <p className='popUpTitle'>{archivo.cod}</p>
                         }
 
                         {/* FORMULARIO DEL POP-UP --> TIPO ARCHIVO // GRADO & ASIGNATURA // SUBIR O NOMBRE */}
@@ -200,7 +207,7 @@ export default function NewUpdateFile({ archivo = null, handleClose, tipo, tipoa
 
                         <section className='formModuloInfo'>
                             <span className='formOptTitle'>
-                                Tipo de archivo:
+                                {i18n[language].accountPopUpTipoFile}
                             </span>
                             <section className="formOptContainer">
                                 <button onClick={() => handleTipoArchivo()} className='formDropDownBtn'>
@@ -223,8 +230,8 @@ export default function NewUpdateFile({ archivo = null, handleClose, tipo, tipoa
                             <span className='formOptTitle'>
                                 {
                                     tipo === 'new'
-                                        ? <>Elige tu archivo:</>
-                                        : <>Actualiza el nombre de tu archivo:</>
+                                        ? i18n[language].accountPopUpUploadFile
+                                        : i18n[language].accountPopUpUpdateFile
                                 }
                             </span>
                             <section className='formOptContainer'>
@@ -240,7 +247,7 @@ export default function NewUpdateFile({ archivo = null, handleClose, tipo, tipoa
                                             ?
                                             <label htmlFor="inputFile" className='formInputFile'>
                                                 <span className='selectFileTitle'>
-                                                    Selecciona un archivo pdf:
+                                                    {i18n[language].accountPopUpPdf}
                                                 </span>
                                                 <span className='selectFileIconContainer'>
                                                     <AiIcons.AiFillFileAdd size={30} className='selectFileIcon' />
@@ -287,7 +294,7 @@ export default function NewUpdateFile({ archivo = null, handleClose, tipo, tipoa
                                         <AiIcons.AiOutlineCloseCircle size={25} />
                                     </span>
                                 </section>
-                                <p>Tu archivo se ha subido y guardado correctamente</p>
+                                <p>{i18n[language].accountPopUpResultadoOK}</p>
                             </section>
                             :
                             actionResponse === 401 || actionResponse === 500
@@ -298,7 +305,7 @@ export default function NewUpdateFile({ archivo = null, handleClose, tipo, tipoa
                                             <AiIcons.AiOutlineCloseCircle size={25} />
                                         </span>
                                     </section>
-                                    <p>Ha habido un error! Vuelve a intentarlo.</p>
+                                    <p>{i18n[language].accountPopUpResultadoError}</p>
                                 </section>
                                 : null
                         : null

@@ -6,10 +6,16 @@ import { readLocalStorageNoRender } from '../../custom-hooks/useLocalStorage';
 import '../../css/chat.css'
 import * as BsIcons from 'react-icons/bs'
 
-const socket = io.connect('http://localhost:3000/', {
-    withCredentials: true,
-    autoConnect: true
-})
+let socket = null
+try {
+    socket = io.connect('http://localhost:3000/', {
+        withCredentials: true,
+        autoConnect: true
+    })
+} catch (error) {
+    console.log('Error: ' + error)
+}
+
 
 export function Chat() {
     const { chat } = useParams()
@@ -34,11 +40,15 @@ export function Chat() {
             'from': 'local'
         }
         const sendinfo = {
-            'chatname':chat,
-            'message':newmsg
+            'chatname': chat,
+            'message': newmsg
         }
-        
-        socket.emit('super', sendinfo)
+
+        try {
+            socket.emit('super', sendinfo)
+        } catch (error) {
+
+        }
 
         setNewMessage('')
         setMessages(messages => [...messages, newmsg])
@@ -46,13 +56,21 @@ export function Chat() {
 
     useEffect(() => {
 
-        socket.on(chat + '_response', (data) => {
-            setMessages(messages => [...messages, data])
-        })
+        try {
+            socket.on(chat + '_response', (data) => {
+                setMessages(messages => [...messages, data])
+            })
+        } catch (error) {
+
+        }
 
         return () => {
-            socket.off('connect')
-            socket.off(chat)
+            try {
+                socket.off('connect')
+                socket.off(chat)
+            } catch (error) {
+
+            }
         }
     }, [])
 
@@ -93,7 +111,7 @@ export function Chat() {
                         onClick={() => sendMessage()}
                         className='newMsgBtn'
                     >
-                        <BsIcons.BsSend size={20} className='newMsgIcon'/>
+                        <BsIcons.BsSend size={20} className='newMsgIcon' />
                     </button>
                 </section>
             </div>

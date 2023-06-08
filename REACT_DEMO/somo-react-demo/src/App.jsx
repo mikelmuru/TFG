@@ -33,19 +33,20 @@ function App() {
         <h1 className='webTitle'>
           <span className="webTitleText">SOMO.pdf</span>
         </h1>
-        {
-          user
-          &&
-          <section className="logOutSection">
-            <HandleLanguage />
+
+        <section className="logOutSection">
+          <HandleLanguage />
+          {
+            user
+            &&
             <article className='logoutall' onClick={() => logOut()}>
               <button className='logOutBtn'>
                 {i18n[language].logout}
               </button>
               <HiLogout size={20} />
             </article>
-          </section>
-        }
+          }
+        </section>
       </header>
 
       <div className='fullApp'>

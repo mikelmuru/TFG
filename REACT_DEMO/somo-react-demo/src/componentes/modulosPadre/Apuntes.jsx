@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Header } from "../../utils/Header";
 import { SearchBar } from "../../utils/SearchBar";
 import { ListaDinamica } from '../modulosIntermedio/ListaDinamica';
@@ -7,6 +7,7 @@ import { ListaDinamicaContext } from '../../context/ListaDinamicaContext';
 import { readLocalStorageNoRender } from '../../custom-hooks/useLocalStorage';
 import * as gradoService from '../../servicios/gradosService';
 import * as usuarioService from '../../servicios/userService';
+import { I18nContext } from '../../context/I18nContext';
 
 
 export function Apuntes() {
@@ -17,6 +18,7 @@ export function Apuntes() {
     const jwtToken = readLocalStorageNoRender('user')
     const [tipoBusqueda, setTipoBusqueda] = useState('usuarios')
     const [tmpBusqueda, setTmpBusqueda] = useState('usuarios')
+    const { language, i18n, setLanguage } = useContext(I18nContext)
 
     const getAll = async () => {
         try {
@@ -73,7 +75,7 @@ export function Apuntes() {
 
     return (
         <>
-            <Header title='Apuntes' />
+            <Header title={i18n[language].menuApuntes} />
             <SearchBar
                 filterType={'seleccion'}
                 handleFilter={handleFiltro}

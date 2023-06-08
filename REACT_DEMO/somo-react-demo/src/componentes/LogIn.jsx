@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { logIn, singUp } from "../servicios/loginService";
 import '../css/LogIn.css'
 import { DarkToggle } from "../utils/DarkThemeToggle";
+import { I18nContext } from "../context/I18nContext";
 
 export function LogIn({ setUserLocalStorage }) {
 
@@ -17,7 +18,9 @@ export function LogIn({ setUserLocalStorage }) {
 
     const [option, setOption] = useState('login')
 
-    const [error, setError] = useState(null)
+    const [error, setError] = useState({code:'null'})
+
+    const { language, i18n, setLanguage } = useContext(I18nContext)
 
     const handleLoginSubmit = async (event) => {
         event.preventDefault()
@@ -44,34 +47,42 @@ export function LogIn({ setUserLocalStorage }) {
             setOption('login')
         }
         else {
-            setError(response.status)
+            setError({code: response.code})
         }
     }
 
     const handleOption = (option) => {
         setOption(option)
-        setError(null)
+        setError({code: 'null'})
     }
 
     return (
         <>
             <div className="login">
                 <p className="welcomeMsg">
-                    SOMO.pdf es la red que conecta alumnos y profesores para compartir conocimiento entre todos.
+                    {i18n[language].loginHeader}
                 </p>
                 {
-                    error === 401
+                    error.code === 'ERR_BAD_REQUEST'
                         ?
                         <span className="errorMsg">
-                            Tu usuario o contraseña no son correctas. Revisa tus credenciales.
+                            {i18n[language].loginError401}
                         </span>
                         : null
                 }
                 {
-                    error === 400
+                    error.code === 400
                         ?
                         <span className="errorMsg">
-                            Ha habido un error. Es posible que no hayas rellenado todos los campos necesarios.
+                            {i18n[language].loginError400}
+                        </span>
+                        : null
+                }
+                {
+                    error.code === 'ERR_NETWORK'
+                        ?
+                        <span className="errorMsg">
+                            {i18n[language].loginErrorSingUp}
                         </span>
                         : null
                 }
@@ -84,7 +95,7 @@ export function LogIn({ setUserLocalStorage }) {
                                     type="text"
                                     value={userdto.username}
                                     name="username"
-                                    placeholder="Username"
+                                    placeholder={i18n[language].loginPlcHldUsername}
                                     onChange={({ target }) => setUserDTO({ ...userdto, username: target.value })}
                                     className="loginOpt"
                                 />
@@ -92,18 +103,18 @@ export function LogIn({ setUserLocalStorage }) {
                                     type="password"
                                     value={userdto.password}
                                     name="password"
-                                    placeholder="Password"
+                                    placeholder={i18n[language].loginPlcHldPassword}
                                     onChange={({ target }) => setUserDTO({ ...userdto, password: target.value })}
                                     className="loginOpt"
                                 />
                                 <button className="loginBtn btn">
-                                    Log In
+                                {i18n[language].loginBtnLogIn}
                                 </button>
                             </form>
-                            <p>¿Aun no tienes una cuenta?</p>
+                            <p>{i18n[language].loginSingUpPregunta}</p>
                             <button onClick={() => handleOption('singup')} className="optionBtn btn">
                                 <span className="optionBtnTxt">
-                                    Crear Cuenta
+                                    {i18n[language].loginBtnSingUp}
                                 </span>
                             </button>
                         </>
@@ -114,7 +125,7 @@ export function LogIn({ setUserLocalStorage }) {
                                     type="text"
                                     value={userdto.username}
                                     name="username"
-                                    placeholder="Username"
+                                    placeholder={i18n[language].loginPlcHldUsername}
                                     onChange={({ target }) => setUserDTO({ ...userdto, username: target.value })}
                                     className="loginOpt"
                                 />
@@ -122,7 +133,7 @@ export function LogIn({ setUserLocalStorage }) {
                                     type="text"
                                     value={userdto.nombre}
                                     name="nombre"
-                                    placeholder="Nombre"
+                                    placeholder={i18n[language].loginPlcHldNombre}
                                     onChange={({ target }) => setUserDTO({ ...userdto, nombre: target.value })}
                                     className="loginOpt"
                                 />
@@ -130,7 +141,7 @@ export function LogIn({ setUserLocalStorage }) {
                                     type="text"
                                     value={userdto.apellido}
                                     name="apellido"
-                                    placeholder="Apellidos"
+                                    placeholder={i18n[language].loginPlcHldApellidos}
                                     onChange={({ target }) => setUserDTO({ ...userdto, apellido: target.value })}
                                     className="loginOpt"
                                 />
@@ -138,7 +149,7 @@ export function LogIn({ setUserLocalStorage }) {
                                     type="mail"
                                     value={userdto.mail}
                                     name="mail"
-                                    placeholder="mail@mail.com"
+                                    placeholder={i18n[language].loginPlcHldMail}
                                     pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,4}"
                                     onChange={({ target }) => setUserDTO({ ...userdto, mail: target.value })}
                                     className="loginOpt"
@@ -147,20 +158,20 @@ export function LogIn({ setUserLocalStorage }) {
                                     type="password"
                                     value={userdto.password}
                                     name="password"
-                                    placeholder="Password"
+                                    placeholder={i18n[language].loginPlcHldPassword}
                                     onChange={({ target }) => setUserDTO({ ...userdto, password: target.value })}
                                     className="loginOpt"
                                 />
                                 <button className="loginBtn btn">
-                                    Sing Up
+                                {i18n[language].loginBtnSingUp}
                                 </button>
                             </form>
 
-                            <p>¿Ya tienes una cuenta?</p>
+                            <p>{i18n[language].loginLoginPregunta}</p>
 
                             <button onClick={() => handleOption('login')} className="optionBtn btn">
                                 <span className="optionBtnTxt">
-                                    Log In
+                                    {i18n[language].loginBtnLogIn}
                                 </span>
                             </button>
                         </>

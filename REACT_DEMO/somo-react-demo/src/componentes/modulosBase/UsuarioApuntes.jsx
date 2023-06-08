@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Header } from '../../utils/Header';
 import { filterApuntes } from '../../servicios/filterData';
@@ -9,6 +9,7 @@ import { Archivo } from './Archivo'
 import * as usuarioService from '../../servicios/userService';
 import * as apuntesService from '../../servicios/apunteService'
 import { readLocalStorageNoRender } from '../../custom-hooks/useLocalStorage';
+import { I18nContext } from '../../context/I18nContext';
 
 
 export function UsuarioApuntes() {
@@ -20,6 +21,7 @@ export function UsuarioApuntes() {
     // ESTADOS SOBRE LA INFO DEL PROPIO USUARIO: FILTRO PARA LA LISTA, LISTA DE APUNTES, USUARIO
     const [filtro, setFiltro] = useState(null)
     const [apuntes, setApuntes] = useState([])
+    const { language, i18n, setLanguage } = useContext(I18nContext)
     const jwtToken = readLocalStorageNoRender('user')
 
     const { usuario } = useParams()
@@ -62,7 +64,7 @@ export function UsuarioApuntes() {
                 &&
                 <div className='apuntesUsuario'>
                     <p className='apuntesUsuarioTitle'>
-                        Estos son los apuntes disponibles que tiene <b>{usuario}</b>
+                        {i18n[language].userApuntesTitulo} <b>{usuario}</b>
                     </p>
                     <SearchBar
                         filterType={'busqueda'}
@@ -101,7 +103,7 @@ export function UsuarioApuntes() {
                                 )
                             })
                             :
-                            <span>{usuario} aun no ha subdio apuntes.</span>
+                            <span>{usuario} {i18n[language].userApuntesVacio}</span>
                         }
                     </section>
                 </div>

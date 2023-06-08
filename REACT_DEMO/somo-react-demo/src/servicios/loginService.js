@@ -16,7 +16,7 @@ export async function logIn(userdto) {
     try {
         response = await axios.post(urlLogin, userdto)
     } catch (error) {
-        response = error.response // codigo de la respuesta (401 normalmente)
+        response = error // codigo de la respuesta (401 normalmente)
     }
 
     return response
@@ -31,9 +31,9 @@ export async function singUp(userdto) {
         ?
         response = await axios.post(urlSingUp, userdto)
         :
-        response = {'status':400}
+        response = {'code':400}
     } catch (error) {
-        response = error.response // codigo de la respuesta (401 normalmente)
+        response = error // codigo de la respuesta (401 normalmente)
     }
 
     return response

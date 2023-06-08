@@ -9,7 +9,7 @@ export function Home() {
 
     const [modulo, setModulo] = useLocalStorage('modulo',MODULO)
 
-    const { language, i18n, setLanguage } = useContext(I18nContext);
+    const { language, i18n, setLanguage } = useContext(I18nContext)
 
     useEffect(() => {
         setModulo(MODULO)
