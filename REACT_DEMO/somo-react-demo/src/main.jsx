@@ -4,9 +4,12 @@ import App from './App.jsx'
 import './index.css'
 import './css/globalStyles.css'
 import { BrowserRouter } from 'react-router-dom'
+import { I18nProvider } from './context/I18nContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <App />
+    <I18nProvider>
+      <App />
+    </I18nProvider>
   </BrowserRouter>,
 )

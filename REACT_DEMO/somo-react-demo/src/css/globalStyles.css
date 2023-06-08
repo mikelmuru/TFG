@@ -165,8 +165,22 @@ hr,
 .logOutBtn {
     color: var(--defaultInfoTextColor);
 }
-.logOutSection:hover,
+/* .logOutSection:hover,
 .logOutSection:hover .logOutBtn {
+    color: var(--fullContrast);
+} */
+
+.logoutall:hover,
+.logoutall:hover .logOutBtn {
+    color: var(--fullContrast);
+}
+
+.langOpt:hover {
+    /* background: radial-gradient(transparent 70%, var(--fullContrast) 95%); */
+    box-shadow: var(--fullContrast) 0px 0px 2.5px;
+}
+
+.languages .clickable:hover {
     color: var(--fullContrast);
 }
 
